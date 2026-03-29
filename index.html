@@ -3,12 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>المحلّل النحوي — Nour Al-Ilm Pro</title>
+  <title>Nour Al-Ilm Pro — نور العلم</title>
   <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
-    /* ===== CLÉ API — À REMPLACER ===== */
-    /* Cherche "VOTRE_CLE_API_ICI" dans ce fichier et remplace par ta clé sk-ant-... */
-
     :root {
       --gold: #c9a84c;
       --gold-light: #f0d98a;
@@ -32,534 +29,469 @@
       color: var(--text);
       font-family: 'Tajawal', sans-serif;
       min-height: 100vh;
-      padding: 0;
     }
 
-    /* HEADER */
-    .header {
-      background: var(--bg2);
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 1.5rem;
+    /* ===== ÉCRAN MOT DE PASSE ===== */
+    #loginScreen {
+      min-height: 100vh;
       display: flex;
       align-items: center;
-      gap: 1rem;
+      justify-content: center;
+      padding: 1rem;
     }
-    .header-icon {
-      width: 40px; height: 40px;
-      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-    }
-    .header-title { font-size: 18px; font-weight: 500; color: var(--gold-light); }
-    .header-sub { font-size: 13px; color: var(--text-muted); font-family: 'Scheherazade New', serif; direction: rtl; }
-    .header-badge {
-      margin-left: auto;
-      background: rgba(201,168,76,0.1);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 4px 12px;
-      font-size: 12px;
-      color: var(--gold);
-    }
-
-    /* MAIN */
-    .main { max-width: 860px; margin: 0 auto; padding: 1.5rem 1rem; }
-
-    /* INPUT SECTION */
-    .input-section {
+    .login-card {
       background: var(--bg2);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.25rem;
-      margin-bottom: 1rem;
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
     }
-    .input-label {
+    .login-logo {
+      font-family: 'Scheherazade New', serif;
+      font-size: 52px;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+    .login-title {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--gold-light);
+      margin-bottom: 4px;
+    }
+    .login-sub {
       font-size: 13px;
       color: var(--text-muted);
-      margin-bottom: 10px;
+      margin-bottom: 2rem;
+      font-family: 'Scheherazade New', serif;
+      direction: rtl;
     }
-    textarea {
+    .login-input {
       width: 100%;
-      min-height: 110px;
       background: var(--bg3);
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 12px 16px;
-      font-family: 'Scheherazade New', serif;
-      font-size: 22px;
-      line-height: 1.9;
-      direction: rtl;
-      color: var(--text-ar);
-      resize: vertical;
+      font-size: 15px;
+      color: var(--text);
+      text-align: center;
+      letter-spacing: 3px;
       outline: none;
+      margin-bottom: 12px;
+      font-family: 'Tajawal', sans-serif;
       transition: border-color 0.2s;
     }
-    textarea:focus { border-color: var(--gold); }
-    textarea::placeholder { color: var(--text-muted); font-size: 18px; }
-
-    .examples-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-    .examples-label { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
-    .ex-btn {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 5px 12px;
-      font-family: 'Scheherazade New', serif;
-      font-size: 15px;
-      color: var(--text-ar);
-      cursor: pointer;
-      direction: rtl;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .ex-btn:hover { border-color: var(--gold); background: rgba(201,168,76,0.06); }
-
-    /* BUTTON */
-    .analyze-btn {
+    .login-input:focus { border-color: var(--gold); }
+    .login-btn {
       width: 100%;
       padding: 12px;
       background: linear-gradient(135deg, var(--gold-dark), var(--gold));
       border: none;
       border-radius: 10px;
-      font-family: 'Tajawal', sans-serif;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 500;
       color: #0d1117;
       cursor: pointer;
-      margin-bottom: 1.5rem;
-      transition: opacity 0.2s, transform 0.1s;
+      font-family: 'Tajawal', sans-serif;
+      transition: opacity 0.2s;
     }
-    .analyze-btn:hover { opacity: 0.9; }
-    .analyze-btn:active { transform: scale(0.99); }
-    .analyze-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
-    /* STATS */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-bottom: 1.5rem;
+    .login-btn:hover { opacity: 0.9; }
+    .login-error {
+      color: var(--red);
+      font-size: 13px;
+      margin-top: 10px;
+      display: none;
     }
-    .stat-card {
-      background: var(--bg2);
+    .login-badge {
+      display: inline-block;
+      background: rgba(201,168,76,0.1);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px;
-      text-align: center;
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 11px;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
     }
-    .stat-val { font-size: 26px; font-weight: 700; color: var(--gold-light); }
-    .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-    .stat-label-ar {
+
+    /* ===== APP PRINCIPALE ===== */
+    #app { display: none; }
+
+    /* HEADER */
+    .header {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-logo {
       font-family: 'Scheherazade New', serif;
+      font-size: 28px;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .header-titles { flex: 1; }
+    .header-title { font-size: 16px; font-weight: 500; color: var(--gold-light); }
+    .header-sub { font-size: 12px; color: var(--text-muted); }
+    .header-badge {
+      background: rgba(201,168,76,0.1);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 11px;
+      color: var(--gold);
+    }
+    .logout-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 5px 10px;
+      color: var(--text-muted);
+      font-size: 12px;
+      cursor: pointer;
+      font-family: 'Tajawal', sans-serif;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .logout-btn:hover { color: var(--text); border-color: var(--border-hover); }
+
+    /* MAIN */
+    .main { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 2rem 0 2.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+    .hero-ar {
+      font-family: 'Scheherazade New', serif;
+      font-size: 42px;
+      color: var(--gold-light);
+      direction: rtl;
+      margin-bottom: 8px;
+    }
+    .hero-fr {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .hero-desc {
       font-size: 14px;
       color: var(--text-muted);
-      direction: rtl;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.7;
     }
 
-    /* WORDS */
-    .section-title {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-      letter-spacing: 0.05em;
+    /* SECTION */
+    .section-label {
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-    }
-    .words-grid {
+      margin-bottom: 1rem;
       display: flex;
-      flex-wrap: wrap;
+      align-items: center;
       gap: 8px;
-      margin-bottom: 1.5rem;
-      direction: rtl;
     }
-    .word-chip {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 8px 14px;
-      cursor: pointer;
-      text-align: center;
-      transition: border-color 0.2s, background 0.2s;
-      min-width: 60px;
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
     }
-    .word-chip:hover { border-color: var(--gold); }
-    .word-chip.active {
-      border-color: var(--gold);
-      background: rgba(201,168,76,0.1);
-    }
-    .word-ar {
-      font-family: 'Scheherazade New', serif;
-      font-size: 20px;
-      color: var(--text-ar);
-      direction: rtl;
-    }
-    .word-type { font-size: 10px; color: var(--text-muted); margin-top: 3px; }
 
-    /* DETAIL CARD */
-    .detail-card {
+    /* GRILLE DE MODULES */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+      margin-bottom: 2.5rem;
+    }
+
+    .module-card {
       background: var(--bg2);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 1.25rem;
-      margin-bottom: 1.5rem;
-      animation: fadeIn 0.25s ease;
-    }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-
-    .detail-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 1rem;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border);
-      direction: rtl;
-    }
-    .detail-word-big {
-      font-family: 'Scheherazade New', serif;
-      font-size: 32px;
-      color: var(--gold-light);
-    }
-    .detail-translit { font-size: 14px; color: var(--text-muted); direction: ltr; }
-
-    .detail-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-    .detail-row {
-      background: var(--bg3);
-      border-radius: 8px;
-      padding: 9px 12px;
-    }
-    .detail-row.full { grid-column: 1 / -1; }
-    .detail-key { font-size: 11px; color: var(--text-muted); margin-bottom: 3px; }
-    .detail-val {
-      font-size: 14px;
+      text-decoration: none;
       color: var(--text);
-      font-weight: 500;
+      display: block;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      cursor: pointer;
     }
-    .detail-val .ar {
+    .module-card:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.04);
+      transform: translateY(-2px);
+    }
+    .module-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .module-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--gold-light);
+      margin-bottom: 4px;
+    }
+    .module-title-ar {
       font-family: 'Scheherazade New', serif;
       font-size: 16px;
       color: var(--text-ar);
       direction: rtl;
-      display: inline-block;
-      margin-right: 6px;
+      margin-bottom: 6px;
     }
-    .badge-origine {
+    .module-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .module-badge {
       display: inline-block;
+      margin-top: 10px;
       padding: 2px 10px;
       border-radius: 20px;
-      font-size: 12px;
-      font-weight: 500;
+      font-size: 11px;
     }
-    .badge-pur { background: rgba(46,160,67,0.15); color: #56d364; border: 1px solid rgba(46,160,67,0.3); }
-    .badge-emprunt { background: rgba(201,168,76,0.1); color: var(--gold); border: 1px solid var(--border); }
-
-    /* ANALYSE GLOBALE */
-    .global-card {
-      background: var(--bg2);
+    .badge-new {
+      background: rgba(46,160,67,0.15);
+      color: #56d364;
+      border: 1px solid rgba(46,160,67,0.3);
+    }
+    .badge-pro {
+      background: rgba(201,168,76,0.1);
+      color: var(--gold);
       border: 1px solid var(--border);
-      border-left: 3px solid var(--gold);
-      border-radius: 14px;
-      padding: 1.25rem;
-      margin-bottom: 1.5rem;
     }
-    .global-text { font-size: 14px; line-height: 1.8; color: var(--text); }
+    .badge-ia {
+      background: rgba(88,101,242,0.15);
+      color: #818cf8;
+      border: 1px solid rgba(88,101,242,0.3);
+    }
 
-    /* LOADING */
-    .loading {
+    /* CARD SPÉCIALE ANALYSEUR */
+    .module-card.featured {
+      border-color: rgba(201,168,76,0.4);
+      background: linear-gradient(135deg, rgba(201,168,76,0.06), var(--bg2));
+      grid-column: 1 / -1;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      padding: 2.5rem;
-      gap: 12px;
+      gap: 1.5rem;
     }
-    .loading-text { font-size: 14px; color: var(--text-muted); }
-    .dots { display: flex; gap: 6px; }
-    .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--gold);
-      animation: bounce 1.2s infinite;
-    }
-    .dot:nth-child(2) { animation-delay: 0.2s; }
-    .dot:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes bounce {
-      0%,80%,100% { transform: translateY(0); opacity: 0.4; }
-      40% { transform: translateY(-8px); opacity: 1; }
-    }
+    .module-card.featured .module-icon { font-size: 40px; margin: 0; }
+    .module-card.featured .module-content { flex: 1; }
+    .module-card.featured .module-title { font-size: 17px; }
+    .module-card.featured .module-desc { font-size: 14px; }
 
-    .error-msg {
-      background: rgba(248,81,73,0.1);
-      border: 1px solid rgba(248,81,73,0.3);
-      border-radius: 10px;
-      padding: 12px 16px;
-      font-size: 14px;
-      color: var(--red);
-      margin-bottom: 1rem;
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      padding: 2rem 0 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
     }
+    .footer a { color: var(--gold); text-decoration: none; }
 
-    /* RESPONSIVE */
     @media (max-width: 500px) {
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .detail-grid { grid-template-columns: 1fr; }
-      .detail-row.full { grid-column: 1; }
+      .module-card.featured { flex-direction: column; align-items: flex-start; }
+      .hero-ar { font-size: 32px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="header">
-    <div class="header-icon">🔬</div>
-    <div>
-      <div class="header-title">Analyseur grammatical arabe</div>
-      <div class="header-sub">المحلّل النحوي والصرفي</div>
+  <!-- ===== ÉCRAN MOT DE PASSE ===== -->
+  <div id="loginScreen">
+    <div class="login-card">
+      <div class="login-logo">نور</div>
+      <div class="login-badge">Accès abonnés</div>
+      <div class="login-title">Nour Al-Ilm Pro</div>
+      <div class="login-sub">نور العلم — تعلّم العربية والتجويد</div>
+      <input type="password" class="login-input" id="passwordInput"
+        placeholder="Mot de passe"
+        onkeydown="if(event.key==='Enter') checkPassword()" />
+      <button class="login-btn" onclick="checkPassword()">Accéder — دخول</button>
+      <div class="login-error" id="loginError">Mot de passe incorrect ❌</div>
     </div>
-    <div class="header-badge">Nour Al-Ilm Pro</div>
   </div>
 
-  <div class="main">
+  <!-- ===== APPLICATION PRINCIPALE ===== -->
+  <div id="app">
 
-    <div class="input-section">
-      <div class="input-label">Saisissez un mot, une phrase ou un paragraphe en arabe :</div>
-      <textarea id="arabicInput" placeholder="اكتب النص العربي هنا..."></textarea>
-      <div class="examples-row">
-        <span class="examples-label">Exemples :</span>
-        <button class="ex-btn" onclick="setEx('ذَهَبَ الطَّالِبُ إِلَى الْمَدْرَسَةِ')">ذَهَبَ الطَّالِبُ إِلَى الْمَدْرَسَةِ</button>
-        <button class="ex-btn" onclick="setEx('بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ')">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</button>
-        <button class="ex-btn" onclick="setEx('الْعِلْمُ نُورٌ وَالْجَهْلُ ظَلَامٌ')">الْعِلْمُ نُورٌ وَالْجَهْلُ ظَلَامٌ</button>
-        <button class="ex-btn" onclick="setEx('إِنَّ اللَّهَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ')">إِنَّ اللَّهَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ</button>
+    <div class="header">
+      <div class="header-logo">نور</div>
+      <div class="header-titles">
+        <div class="header-title">Nour Al-Ilm Pro</div>
+        <div class="header-sub">نور العلم — Langue arabe & Tajwid</div>
       </div>
+      <div class="header-badge">Pro</div>
+      <button class="logout-btn" onclick="logout()">Déconnexion</button>
     </div>
 
-    <button class="analyze-btn" id="analyzeBtn" onclick="analyze()">
-      تحليل — Analyser
-    </button>
+    <div class="main">
 
-    <div id="results"></div>
+      <!-- HERO -->
+      <div class="hero">
+        <div class="hero-ar">نور العلم</div>
+        <div class="hero-fr">La lumière du savoir</div>
+        <div class="hero-desc">
+          Bienvenue dans votre espace d'apprentissage de la langue arabe et du Tajwid.
+          Accédez à vos cours, exercices et outils pédagogiques.
+        </div>
+      </div>
 
+      <!-- OUTIL IA — ANALYSEUR -->
+      <div class="section-label">Outil IA — أداة الذكاء الاصطناعي</div>
+      <div class="modules-grid" style="margin-bottom: 2.5rem;">
+        <a class="module-card featured" href="analyseur-arabe.html">
+          <span class="module-icon">🔬</span>
+          <div class="module-content">
+            <div class="module-title-ar">المحلّل النحوي والصرفي</div>
+            <div class="module-title">Analyseur grammatical arabe</div>
+            <div class="module-desc">
+              Analysez n'importe quel mot, phrase ou paragraphe arabe : nature, fonction, racine, origine, cas grammatical, forme verbale, temps et bien plus.
+            </div>
+            <span class="module-badge badge-ia">✦ Propulsé par l'IA</span>
+            <span class="module-badge badge-new" style="margin-left:6px;">Nouveau</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- COURS ARABE -->
+      <div class="section-label">Cours de langue arabe — دروس اللغة العربية</div>
+      <div class="modules-grid">
+
+        <div class="module-card" onclick="alert('Cours bientôt disponible')">
+          <span class="module-icon">📖</span>
+          <div class="module-title-ar">النحو — Grammaire</div>
+          <div class="module-title">Grammaire arabe</div>
+          <div class="module-desc">Les bases du nahw : cas grammaticaux, types de phrases, accord des noms et des verbes.</div>
+          <span class="module-badge badge-pro">Pro</span>
+        </div>
+
+        <div class="module-card" onclick="alert('Cours bientôt disponible')">
+          <span class="module-icon">🔤</span>
+          <div class="module-title-ar">الصرف — Morphologie</div>
+          <div class="module-title">Morphologie arabe</div>
+          <div class="module-desc">Le sarf : racines triconsonantiques, formes verbales I à X, dérivation des mots.</div>
+          <span class="module-badge badge-pro">Pro</span>
+        </div>
+
+        <div class="module-card" onclick="alert('Cours bientôt disponible')">
+          <span class="module-icon">📝</span>
+          <div class="module-title-ar">المفردات — Vocabulaire</div>
+          <div class="module-title">Vocabulaire coranique</div>
+          <div class="module-desc">Les 500 mots les plus fréquents du Coran avec racines, sens et contexte d'usage.</div>
+          <span class="module-badge badge-pro">Pro</span>
+        </div>
+
+      </div>
+
+      <!-- TAJWID -->
+      <div class="section-label">Tajwid — علم التجويد</div>
+      <div class="modules-grid">
+
+        <div class="module-card" onclick="alert('Cours bientôt disponible')">
+          <span class="module-icon">🎵</span>
+          <div class="module-title-ar">التجويد المبتدئ</div>
+          <div class="module-title">Tajwid débutant</div>
+          <div class="module-desc">Les règles fondamentales : makharij, sifaat, nun sakinah, mad et leurs applications.</div>
+          <span class="module-badge badge-pro">Pro</span>
+        </div>
+
+        <div class="module-card" onclick="alert('Cours bientôt disponible')">
+          <span class="module-icon">⭐</span>
+          <div class="module-title-ar">التجويد المتقدم</div>
+          <div class="module-title">Tajwid avancé</div>
+          <div class="module-desc">Règles avancées : waqf et ibtida', rasm uthmani, qira'at et cas particuliers.</div>
+          <span class="module-badge badge-pro">Pro</span>
+        </div>
+
+        <div class="module-card" onclick="alert('Cours bientôt disponible')">
+          <span class="module-icon">✍️</span>
+          <div class="module-title-ar">الرسم العثماني</div>
+          <div class="module-title">Écriture uthmanique</div>
+          <div class="module-desc">Les spécificités de l'écriture coranique : alifs supprimés, ta' marbuta, règles d'orthographe.</div>
+          <span class="module-badge badge-pro">Pro</span>
+        </div>
+
+      </div>
+
+      <!-- EXERCICES -->
+      <div class="section-label">Exercices & outils — التدريبات والأدوات</div>
+      <div class="modules-grid">
+
+        <div class="module-card" onclick="window.open('https://nural3ilm.github.io/nour-al-kalima/', '_blank')">
+          <span class="module-icon">🔍</span>
+          <div class="module-title-ar">نور الكلمة القرآنية</div>
+          <div class="module-title">Mots-mêlés coraniques</div>
+          <div class="module-desc">Retrouvez les mots coraniques cachés dans la grille. Entraînez votre reconnaissance du vocabulaire du Coran.</div>
+          <span class="module-badge badge-new">Disponible</span>
+        </div>
+
+        <div class="module-card" onclick="alert('Exercices bientôt disponibles')">
+          <span class="module-icon">📋</span>
+          <div class="module-title-ar">تدريبات الكتابة</div>
+          <div class="module-title">Exercices d'écriture</div>
+          <div class="module-desc">Fiches PDF d'exercices d'écriture arabe : lettres, mots coraniques, calligraphie guidée.</div>
+          <span class="module-badge badge-pro">Pro</span>
+        </div>
+
+        <div class="module-card" onclick="alert('Bientôt disponible')">
+          <span class="module-icon">🃏</span>
+          <div class="module-title-ar">بطاقات المراجعة</div>
+          <div class="module-title">Flashcards</div>
+          <div class="module-desc">Révisez le vocabulaire et les règles de grammaire avec le système de répétition espacée.</div>
+          <span class="module-badge badge-pro">Pro</span>
+        </div>
+
+      </div>
+
+      <div class="footer">
+        <p>Nour Al-Ilm Pro — نور العلم &nbsp;|&nbsp; Tous droits réservés</p>
+        <p style="margin-top:6px;">Abonnement via <a href="https://whop.com/nur-al-ilm-pro" target="_blank">Whop</a></p>
+      </div>
+
+    </div>
   </div>
 
   <script>
-    // ================================================
-    // ⚠️  REMPLACE ICI TA CLÉ API ANTHROPIC
-    // ================================================
-    const API_KEY = "VOTRE_CLE_API_ICI";
-    // ================================================
+    const PASSWORD = "islam2025";
 
-    let analysisData = null;
-
-    function setEx(text) {
-      document.getElementById('arabicInput').value = text;
-    }
-
-    function countLetters(text) {
-      return text.replace(/[\s\u0610-\u061A\u064B-\u065F\u0660-\u066F]/g, '').length;
-    }
-    function countWords(text) {
-      return text.trim().split(/\s+/).filter(w => w.length > 0).length;
-    }
-    function countSentences(text) {
-      return text.split(/[.!?؟\n]+/).filter(s => s.trim().length > 0).length || 1;
-    }
-
-    async function analyze() {
-      const text = document.getElementById('arabicInput').value.trim();
-      if (!text) return;
-
-      if (API_KEY === "VOTRE_CLE_API_ICI") {
-        document.getElementById('results').innerHTML =
-          '<div class="error-msg">⚠️ Clé API non configurée. Remplace VOTRE_CLE_API_ICI dans le fichier HTML.</div>';
-        return;
+    function checkPassword() {
+      const val = document.getElementById('passwordInput').value;
+      if (val === PASSWORD) {
+        sessionStorage.setItem('nural3ilm_auth', 'true');
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('passwordInput').focus();
       }
-
-      const btn = document.getElementById('analyzeBtn');
-      btn.disabled = true;
-      btn.textContent = 'Analyse en cours...';
-
-      const letters = countLetters(text);
-      const words = countWords(text);
-      const sentences = countSentences(text);
-
-      document.getElementById('results').innerHTML = `
-        <div class="loading">
-          <div class="dots">
-            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-          </div>
-          <div class="loading-text">Analyse grammaticale en cours… يجري التحليل</div>
-        </div>`;
-
-      try {
-        const res = await fetch('https://api.anthropic.com/v1/messages', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': API_KEY,
-            'anthropic-version': '2023-06-01',
-            'anthropic-dangerous-direct-browser-access': 'true'
-          },
-          body: JSON.stringify({
-            model: 'claude-sonnet-4-20250514',
-            max_tokens: 2000,
-            system: `Tu es un expert en grammaire arabe classique et moderne (nahw, sarf). Analyse grammaticalement le texte arabe fourni. Réponds UNIQUEMENT en JSON valide, sans texte avant ou après, sans backticks markdown.
-
-Format JSON attendu :
-{
-  "words": [
-    {
-      "word": "الكلمة بالشكل",
-      "transliteration": "al-kalima",
-      "nature": "nom / verbe / préposition / adverbe / pronom / conjonction / particule / interjection",
-      "nature_ar": "اسم / فعل / حرف / ضمير / ظرف / ...",
-      "fonction": "sujet / prédicat / complément d'objet / complément circonstanciel / attribut / apposition / etc.",
-      "fonction_ar": "مبتدأ / خبر / فاعل / مفعول به / حال / نعت / ...",
-      "racine": "ذ-ه-ب",
-      "origine": "arabe pur / emprunt persan / emprunt grec / emprunt hébreu / emprunt turc / emprunt autre",
-      "details": {
-        "genre": "masculin / féminin / N/A",
-        "nombre": "singulier / duel / pluriel / N/A",
-        "cas": "nominatif (raf') / accusatif (nasb) / génitif (jarr) / N/A",
-        "temps": "passé (madi) / présent-futur (mudari') / impératif (amr) / N/A",
-        "personne": "1ère / 2ème / 3ème / N/A",
-        "forme_verbale": "forme I / forme II / forme III / forme IV / forme V / forme VI / forme VII / forme VIII / forme X / N/A",
-        "type_nom": "défini / indéfini / N/A"
-      },
-      "signification_fr": "signification précise en français dans ce contexte"
-    }
-  ],
-  "analyse_globale": "Analyse syntaxique complète en français : type de phrase, structure, points grammaticaux notables. 3-4 phrases."
-}`,
-            messages: [{ role: 'user', content: `Analyse ce texte arabe : ${text}` }]
-          })
-        });
-
-        const data = await res.json();
-
-        if (data.error) {
-          throw new Error(data.error.message);
-        }
-
-        const raw = data.content[0].text;
-        const clean = raw.replace(/```json|```/g, '').trim();
-        analysisData = JSON.parse(clean);
-
-        const verbCount = analysisData.words.filter(w =>
-          w.nature && w.nature.toLowerCase().includes('verbe')
-        ).length;
-
-        renderResults(letters, words, sentences, verbCount, analysisData);
-
-      } catch(e) {
-        document.getElementById('results').innerHTML =
-          `<div class="error-msg">❌ Erreur : ${e.message || 'Impossible de contacter l\'API. Vérifiez votre clé API et votre connexion.'}</div>`;
-      }
-
-      btn.disabled = false;
-      btn.textContent = 'تحليل — Analyser';
     }
 
-    function renderResults(letters, words, sentences, verbs, data) {
-      let html = `
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-val">${letters}</div>
-            <div class="stat-label">Lettres</div>
-            <div class="stat-label-ar">حروف</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-val">${words}</div>
-            <div class="stat-label">Mots</div>
-            <div class="stat-label-ar">كلمات</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-val">${sentences}</div>
-            <div class="stat-label">Phrases</div>
-            <div class="stat-label-ar">جمل</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-val">${verbs}</div>
-            <div class="stat-label">Verbes</div>
-            <div class="stat-label-ar">أفعال</div>
-          </div>
-        </div>
-
-        <div class="section-title">Cliquez sur un mot pour l'analyser en détail — انقر على كلمة للتحليل</div>
-        <div class="words-grid" id="wordsGrid">`;
-
-      data.words.forEach((w, i) => {
-        html += `
-          <div class="word-chip" id="chip-${i}" onclick="showDetail(${i})">
-            <div class="word-ar">${w.word}</div>
-            <div class="word-type">${w.nature || ''}</div>
-          </div>`;
-      });
-
-      html += `</div><div id="wordDetail"></div>`;
-
-      if (data.analyse_globale) {
-        html += `
-          <div class="section-title">Analyse syntaxique globale — التحليل النحوي الشامل</div>
-          <div class="global-card">
-            <div class="global-text">${data.analyse_globale}</div>
-          </div>`;
-      }
-
-      document.getElementById('results').innerHTML = html;
-
-      // Auto-afficher le premier mot
-      if (data.words.length > 0) showDetail(0);
+    function logout() {
+      sessionStorage.removeItem('nural3ilm_auth');
+      document.getElementById('app').style.display = 'none';
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('passwordInput').value = '';
     }
 
-    function showDetail(i) {
-      document.querySelectorAll('.word-chip').forEach(c => c.classList.remove('active'));
-      const chip = document.getElementById('chip-' + i);
-      if (chip) chip.classList.add('active');
-
-      const w = analysisData.words[i];
-      const d = w.details || {};
-
-      const origineClass = (w.origine || '').includes('pur') ? 'badge-pur' : 'badge-emprunt';
-
-      const rows = [];
-
-      if (w.nature) rows.push({ key: 'Nature / طبيعة الكلمة', val: `<span class="ar">${w.nature_ar || ''}</span> ${w.nature}`, full: false });
-      if (w.fonction) rows.push({ key: 'Fonction / الوظيفة النحوية', val: `<span class="ar">${w.fonction_ar || ''}</span> ${w.fonction}`, full: false });
-      if (w.racine) rows.push({ key: 'Racine / الجذر', val: `<span class="ar">${w.racine}</span>`, full: false });
-      if (w.origine) rows.push({ key: 'Origine / الأصل اللغوي', val: `<span class="badge-origine ${origineClass}">${w.origine}</span>`, full: false });
-      if (d.genre && d.genre !== 'N/A') rows.push({ key: 'Genre / الجنس', val: d.genre, full: false });
-      if (d.nombre && d.nombre !== 'N/A') rows.push({ key: 'Nombre / العدد', val: d.nombre, full: false });
-      if (d.cas && d.cas !== 'N/A') rows.push({ key: 'Cas grammatical / الإعراب', val: d.cas, full: false });
-      if (d.type_nom && d.type_nom !== 'N/A') rows.push({ key: 'Définition / التعريف', val: d.type_nom, full: false });
-      if (d.temps && d.temps !== 'N/A') rows.push({ key: 'Temps / الزمن', val: d.temps, full: false });
-      if (d.personne && d.personne !== 'N/A') rows.push({ key: 'Personne / الضمير', val: d.personne, full: false });
-      if (d.forme_verbale && d.forme_verbale !== 'N/A') rows.push({ key: 'Forme verbale / الباب الصرفي', val: d.forme_verbale, full: false });
-      if (w.signification_fr) rows.push({ key: 'Signification / المعنى', val: w.signification_fr, full: true });
-
-      let html = `
-        <div class="detail-card">
-          <div class="detail-header">
-            <div class="detail-word-big">${w.word}</div>
-            <div class="detail-translit">${w.transliteration || ''}</div>
-          </div>
-          <div class="detail-grid">`;
-
-      rows.forEach(r => {
-        html += `
-          <div class="detail-row${r.full ? ' full' : ''}">
-            <div class="detail-key">${r.key}</div>
-            <div class="detail-val">${r.val}</div>
-          </div>`;
-      });
-
-      html += `</div></div>`;
-      document.getElementById('wordDetail').innerHTML = html;
+    // Vérifier si déjà connecté
+    if (sessionStorage.getItem('nural3ilm_auth') === 'true') {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
     }
   </script>
 
