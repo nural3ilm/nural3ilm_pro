@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نور العلم — Portail</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark: #09100d;
+  --dark2: #0f1a13;
+  --dark3: #162010;
+  --green: #1a5c2a;
+  --green-l: #2d9e4e;
+  --green-b: #4acc6e;
+  --gold: #c9a84c;
+  --gold-l: #e8c97a;
+  --cream: #f5f0e8;
+  --muted: rgba(245,240,232,0.45);
+  --border: rgba(45,158,78,0.18);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--dark);
+  color: var(--cream);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Animated background */
+.bg-glow {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 20%, rgba(26,92,42,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 80%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(45,158,78,0.06) 0%, transparent 70%);
+  pointer-events: none;
+  animation: bgpulse 8s ease-in-out infinite alternate;
+}
+@keyframes bgpulse {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* Arabesque pattern */
+.bg-pattern {
+  position: fixed; inset: 0; z-index: 0; opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%234acc6e' fill-opacity='1'%3E%3Cpath d='M40 0L50 30H80L57 48L67 80L40 62L13 80L23 48L0 30H30Z'/%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.app { position: relative; z-index: 1; }
+
+/* ─── LOCK SCREEN ─── */
+#lock {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 40px 24px; text-align: center;
+  background: linear-gradient(160deg, #040a06 0%, #09100d 50%, #0d1a0f 100%);
+}
+
+.lock-bismillah {
+  font-family: 'Scheherazade New', serif;
+  font-size: 32px; color: var(--gold);
+  margin-bottom: 32px; line-height: 1.6;
+  opacity: 0; animation: fadeup 1s ease 0.2s forwards;
+}
+.lock-logo {
+  font-family: 'Scheherazade New', serif;
+  font-size: 90px; color: var(--green-b);
+  line-height: 0.9; margin-bottom: 8px;
+  text-shadow: 0 0 60px rgba(74,204,110,0.4), 0 0 120px rgba(74,204,110,0.2);
+  opacity: 0; animation: fadeup 1s ease 0.4s forwards;
+}
+.lock-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px; letter-spacing: 6px; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 6px;
+  opacity: 0; animation: fadeup 1s ease 0.6s forwards;
+}
+.lock-tagline {
+  font-size: 13px; color: var(--muted);
+  margin-bottom: 48px; letter-spacing: 1px;
+  opacity: 0; animation: fadeup 1s ease 0.7s forwards;
+}
+
+.lock-card {
+  background: rgba(15,26,19,0.8);
+  border: 1px solid rgba(45,158,78,0.25);
+  border-radius: 24px; padding: 32px 28px;
+  width: 100%; max-width: 380px;
+  backdrop-filter: blur(20px);
+  opacity: 0; animation: fadeup 1s ease 0.9s forwards;
+}
+.lock-card h3 { font-size: 18px; color: var(--cream); margin-bottom: 6px; }
+.lock-card p { font-size: 12px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+.lock-input {
+  width: 100%; padding: 14px 18px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 14px; color: var(--cream);
+  font-size: 18px; text-align: center;
+  letter-spacing: 4px; outline: none;
+  font-family: 'DM Sans', sans-serif;
+  margin-bottom: 12px;
+  transition: border-color 0.3s;
+}
+.lock-input:focus { border-color: var(--green-l); }
+.lock-btn {
+  width: 100%; padding: 14px;
+  background: linear-gradient(135deg, var(--green), var(--green-l));
+  border: none; border-radius: 14px;
+  color: #fff; font-size: 15px; font-weight: 600;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all 0.3s; letter-spacing: 1px;
+}
+.lock-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(45,158,78,0.4); }
+.lock-error { color: #ff8888; font-size: 12px; margin-top: 10px; display: none; }
+
+@keyframes fadeup {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── MAIN PORTAL ─── */
+#portal { display: none; min-height: 100vh; }
+
+/* Header */
+.portal-header {
+  padding: 40px 24px 32px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  background: linear-gradient(180deg, rgba(26,92,42,0.12) 0%, transparent 100%);
+}
+.portal-logo {
+  font-family: 'Scheherazade New', serif;
+  font-size: 64px; color: var(--green-b);
+  line-height: 0.9; margin-bottom: 8px;
+  text-shadow: 0 0 40px rgba(74,204,110,0.3);
+}
+.portal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px; letter-spacing: 6px;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 6px;
+}
+.portal-subtitle { font-size: 13px; color: var(--muted); }
+
+.portal-verse {
+  margin-top: 20px; padding: 16px 20px;
+  background: rgba(201,168,76,0.06);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 16px; display: inline-block;
+  max-width: 500px;
+}
+.verse-ar {
+  font-family: 'Scheherazade New', serif;
+  font-size: 22px; color: var(--gold); direction: rtl;
+  line-height: 1.8; margin-bottom: 4px;
+}
+.verse-fr { font-size: 11px; color: var(--muted); font-style: italic; }
+
+/* Stats bar */
+.stats-bar {
+  display: flex; justify-content: center; gap: 32px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(15,26,19,0.5);
+}
+.stat { text-align: center; }
+.stat-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; color: var(--green-b); font-weight: 700;
+}
+.stat-l { font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+
+/* Apps grid */
+.apps-section { padding: 32px 20px 80px; max-width: 800px; margin: 0 auto; }
+.section-label {
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 20px; padding-left: 4px;
+}
+
+.apps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.app-card {
+  background: rgba(15,26,19,0.7);
+  border: 1px solid var(--border);
+  border-radius: 22px; padding: 24px 20px;
+  cursor: pointer; transition: all 0.3s;
+  position: relative; overflow: hidden;
+  text-decoration: none; color: inherit;
+  display: block;
+}
+.app-card::before {
+  content: ''; position: absolute;
+  inset: 0; border-radius: 22px;
+  background: linear-gradient(135deg, rgba(74,204,110,0.08) 0%, transparent 60%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.app-card::after {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--green-l), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.app-card:hover { border-color: rgba(74,204,110,0.4); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+.app-card:hover::before { opacity: 1; }
+.app-card:hover::after { opacity: 1; }
+
+.app-card.gold-accent { border-color: rgba(201,168,76,0.2); }
+.app-card.gold-accent::before { background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, transparent 60%); }
+.app-card.gold-accent::after { background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.app-card.gold-accent:hover { border-color: rgba(201,168,76,0.4); }
+
+.app-card.blue-accent { border-color: rgba(74,74,204,0.2); }
+.app-card.blue-accent::before { background: linear-gradient(135deg, rgba(74,74,204,0.08) 0%, transparent 60%); }
+.app-card.blue-accent::after { background: linear-gradient(90deg, transparent, #4444cc, transparent); }
+.app-card.blue-accent:hover { border-color: rgba(74,74,204,0.4); }
+
+.app-card.red-accent { border-color: rgba(204,74,74,0.2); }
+.app-card.red-accent::before { background: linear-gradient(135deg, rgba(204,74,74,0.08) 0%, transparent 60%); }
+.app-card.red-accent::after { background: linear-gradient(90deg, transparent, #cc4a4a, transparent); }
+.app-card.red-accent:hover { border-color: rgba(204,74,74,0.4); }
+
+.app-icon {
+  font-size: 40px; margin-bottom: 14px;
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+.app-name-ar {
+  font-family: 'Scheherazade New', serif;
+  font-size: 22px; color: var(--gold);
+  direction: rtl; text-align: right;
+  margin-bottom: 4px; line-height: 1.4;
+}
+.app-name-fr {
+  font-size: 13px; color: var(--cream);
+  font-weight: 600; margin-bottom: 8px;
+}
+.app-desc {
+  font-size: 11px; color: var(--muted);
+  line-height: 1.6; margin-bottom: 16px;
+}
+.app-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 16px; }
+.app-tag {
+  font-size: 10px; padding: 3px 8px;
+  border-radius: 20px; border: 1px solid var(--border);
+  color: var(--muted); background: rgba(255,255,255,0.04);
+}
+.app-btn {
+  width: 100%; padding: 10px;
+  background: rgba(45,158,78,0.15);
+  border: 1px solid rgba(45,158,78,0.3);
+  border-radius: 10px; color: var(--green-b);
+  font-size: 12px; font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer; transition: all 0.2s;
+  letter-spacing: 1px;
+}
+.app-btn:hover { background: rgba(45,158,78,0.25); }
+.app-card.gold-accent .app-btn { background: rgba(201,168,76,0.12); border-color: rgba(201,168,76,0.3); color: var(--gold); }
+.app-card.blue-accent .app-btn { background: rgba(74,74,204,0.12); border-color: rgba(74,74,204,0.3); color: #aaaaff; }
+.app-card.red-accent .app-btn { background: rgba(204,74,74,0.12); border-color: rgba(204,74,74,0.3); color: #ffaaaa; }
+
+.app-badge {
+  position: absolute; top: 14px; right: 14px;
+  font-size: 9px; padding: 3px 8px;
+  border-radius: 20px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.badge-new { background: rgba(74,204,110,0.2); color: var(--green-b); border: 1px solid rgba(74,204,110,0.3); }
+.badge-pro { background: rgba(201,168,76,0.2); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+
+/* Coming soon card */
+.app-card.coming {
+  opacity: 0.5; cursor: default;
+  pointer-events: none;
+}
+.badge-soon { background: rgba(255,255,255,0.08); color: var(--muted); border: 1px solid rgba(255,255,255,0.1); }
+
+/* Footer */
+.portal-footer {
+  text-align: center; padding: 24px;
+  border-top: 1px solid var(--border);
+  font-size: 11px; color: var(--muted);
+}
+.footer-logo { font-family: 'Scheherazade New', serif; font-size: 24px; color: var(--green-b); margin-bottom: 6px; }
+
+@media (max-width: 480px) {
+  .apps-grid { grid-template-columns: 1fr; }
+  .portal-logo { font-size: 48px; }
+  .stats-bar { gap: 20px; }
+  .lock-logo { font-size: 70px; }
+}
+@media (min-width: 700px) {
+  .apps-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="bg-pattern"></div>
+
+<div class="app">
+
+<!-- ═══════ LOCK ═══════ -->
+<div id="lock">
+  <div class="lock-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+  <div class="lock-logo">نور</div>
+  <div class="lock-name">Nour Al-Ilm Pro</div>
+  <div class="lock-tagline">La lumière de la science — نور العلم</div>
+
+  <div class="lock-card">
+    <h3>🔒 Accès Membres</h3>
+    <p>Bienvenue sur votre portail Nour Al-Ilm Pro. Entrez votre mot de passe pour accéder à toutes vos applications.</p>
+    <input type="password" class="lock-input" id="lpwd" placeholder="••••••••••">
+    <button class="lock-btn" id="lbtn">Accéder au Portail →</button>
+    <div class="lock-error" id="lerr">Mot de passe incorrect. Vérifiez votre email Whop.</div>
+  </div>
+</div>
+
+<!-- ═══════ PORTAL ═══════ -->
+<div id="portal">
+
+  <div class="portal-header">
+    <div class="portal-logo">نور العلم</div>
+    <div class="portal-title">Nour Al-Ilm Pro</div>
+    <div class="portal-subtitle">Votre portail d'apprentissage islamique</div>
+    <div class="portal-verse">
+      <div class="verse-ar">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</div>
+      <div class="verse-fr">« Lis au nom de ton Seigneur qui a créé » — Al-Alaq 96:1</div>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-n">4</div><div class="stat-l">Applications</div></div>
+    <div class="stat"><div class="stat-n">500+</div><div class="stat-l">Douâas</div></div>
+    <div class="stat"><div class="stat-n">100+</div><div class="stat-l">Leçons</div></div>
+    <div class="stat"><div class="stat-n">∞</div><div class="stat-l">Baraka</div></div>
+  </div>
+
+  <div class="apps-section">
+    <div class="section-label">Vos Applications</div>
+    <div class="apps-grid">
+
+      <!-- NOUR AL-ILM PRO -->
+      <div class="app-card" onclick="openApp('nural3ilm')">
+        <span class="app-badge badge-pro">PRO</span>
+        <span class="app-icon">📖</span>
+        <div class="app-name-ar">نور العلم</div>
+        <div class="app-name-fr">Nour Al-Ilm</div>
+        <div class="app-desc">Apprenez l'alphabet arabe, la grammaire et le Tajwid avec des exercices interactifs.</div>
+        <div class="app-tags">
+          <span class="app-tag">Arabe</span>
+          <span class="app-tag">Tajwid</span>
+          <span class="app-tag">Grammaire</span>
+          <span class="app-tag">Quiz</span>
+        </div>
+        <button class="app-btn">Ouvrir →</button>
+      </div>
+
+      <!-- DOUAA -->
+      <div class="app-card gold-accent" onclick="openApp('douaa')">
+        <span class="app-badge badge-new">NOUVEAU</span>
+        <span class="app-icon">🤲</span>
+        <div class="app-name-ar">دُعَاء</div>
+        <div class="app-name-fr">Invocation</div>
+        <div class="app-desc">500+ douâas authentiques classés par thématiques. Hadiths certifiés et Coran.</div>
+        <div class="app-tags">
+          <span class="app-tag">Douâas</span>
+          <span class="app-tag">Hadith</span>
+          <span class="app-tag">Coran</span>
+          <span class="app-tag">Favoris</span>
+        </div>
+        <button class="app-btn" style="background:rgba(201,168,76,0.12);border-color:rgba(201,168,76,0.3);color:var(--gold);">Ouvrir →</button>
+      </div>
+
+      <!-- FRANÇAIS VIVANT -->
+      <div class="app-card blue-accent" onclick="openApp('francais')">
+        <span class="app-badge badge-pro">PRO</span>
+        <span class="app-icon">🇫🇷</span>
+        <div class="app-name-ar">الفرنسية</div>
+        <div class="app-name-fr">Français Vivant</div>
+        <div class="app-desc">Apprenez le français facilement. Conçu pour les arabophones et hispanophones.</div>
+        <div class="app-tags">
+          <span class="app-tag">Français</span>
+          <span class="app-tag">FLE</span>
+          <span class="app-tag">A1-B1</span>
+        </div>
+        <button class="app-btn" style="background:rgba(74,74,204,0.12);border-color:rgba(74,74,204,0.3);color:#aaaaff;">Ouvrir →</button>
+      </div>
+
+      <!-- ANALYSEUR -->
+      <div class="app-card red-accent" onclick="openApp('analyseur')">
+        <span class="app-badge badge-new">NOUVEAU</span>
+        <span class="app-icon">🔍</span>
+        <div class="app-name-ar">مُحَلِّل النُّصُوص</div>
+        <div class="app-name-fr">Analyseur de Texte</div>
+        <div class="app-desc">Scannez un texte et obtenez une analyse grammaticale complète en français et arabe.</div>
+        <div class="app-tags">
+          <span class="app-tag">IA</span>
+          <span class="app-tag">Grammaire</span>
+          <span class="app-tag">Scan</span>
+          <span class="app-tag">Arabe/FR</span>
+        </div>
+        <button class="app-btn" style="background:rgba(204,74,74,0.12);border-color:rgba(204,74,74,0.3);color:#ffaaaa;">Ouvrir →</button>
+      </div>
+
+    </div>
+
+    <!-- PDF SECTION -->
+    <div class="section-label" style="margin-top:40px;">Vos Cours PDF</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
+
+      <div style="background:rgba(15,26,19,0.6);border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;">
+        <span style="font-size:28px;">📘</span>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--cream);">Grammaire Arabe</div>
+          <div style="font-size:11px;color:var(--muted);">Cours complet bilingue</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(15,26,19,0.6);border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;">
+        <span style="font-size:28px;">📗</span>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--cream);">Tajwid Débutant</div>
+          <div style="font-size:11px;color:var(--muted);">Makharij & Sifât</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(15,26,19,0.6);border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;">
+        <span style="font-size:28px;">📕</span>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--cream);">Tajwid Avancé</div>
+          <div style="font-size:11px;color:var(--muted);">Lecture Hafs & Fawatih</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(15,26,19,0.6);border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;">
+        <span style="font-size:28px;">📗</span>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--cream);">Vocabulaire Coranique</div>
+          <div style="font-size:11px;color:var(--muted);">500+ mots essentiels</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(15,26,19,0.6);border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;">
+        <span style="font-size:28px;">📘</span>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--cream);">Exercices Écrits</div>
+          <div style="font-size:11px;color:var(--muted);">80+ exercices progressifs</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(15,26,19,0.4);border:1px dashed var(--border);border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;opacity:0.5;">
+        <span style="font-size:28px;">📙</span>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--cream);">Prochainement...</div>
+          <div style="font-size:11px;color:var(--muted);">Nouveau cours en préparation</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="portal-footer">
+    <div class="footer-logo">نور العلم</div>
+    <div>Nour Al-Ilm Pro — Tous droits réservés</div>
+    <div style="margin-top:4px;">whop.com/nur-al-ilm-pro</div>
+  </div>
+
+</div>
+</div>
+
+<script>
+var PWD = "islam2025";
+
+document.getElementById("lbtn").onclick = function() {
+  var p = document.getElementById("lpwd").value;
+  if (p === PWD) {
+    sessionStorage.setItem("nural_ok", "1");
+    showPortal();
+  } else {
+    document.getElementById("lerr").style.display = "block";
+    document.getElementById("lpwd").value = "";
+  }
+};
+
+document.getElementById("lpwd").onkeydown = function(e) {
+  if (e.key === "Enter") document.getElementById("lbtn").click();
+};
+
+function showPortal() {
+  document.getElementById("lock").style.display = "none";
+  document.getElementById("portal").style.display = "block";
+}
+
+if (sessionStorage.getItem("nural_ok") === "1") showPortal();
+
+// App URLs — à mettre à jour avec tes vrais liens GitHub
+var APPS = {
+  nural3ilm: "https://nural3ilm.github.io/nural3ilm_pro/",
+  douaa: "douaa_invocation.html",
+  francais: "https://nural3ilm.github.io/francais-vivant/",
+  analyseur: "analyseur_texte.html"
+};
+
+function openApp(id) {
+  var url = APPS[id];
+  if (url) window.open(url, "_blank");
+}
+</script>
+</body>
+</html>

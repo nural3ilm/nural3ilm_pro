@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دُعَاء — Invocation</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--gd:#0a1f0f;--gm:#0f2d14;--gn:#1a5c2a;--gl:#2d9e4e;--gb:#4acc6e;--gold:#c9a84c;--cr:#f5f0e8;--mu:rgba(245,240,232,0.45);--br:rgba(45,158,78,0.2);--cb:rgba(15,45,20,0.8);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--gd);color:var(--cr);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 10% 10%,rgba(45,158,78,0.12) 0%,transparent 40%),radial-gradient(ellipse at 90% 90%,rgba(201,168,76,0.08) 0%,transparent 40%);pointer-events:none;}
+.app{position:relative;z-index:1;}
+.screen{display:none;min-height:100vh;flex-direction:column;}
+.screen.act{display:flex;}
+#sl{align-items:center;justify-content:center;text-align:center;padding:40px 24px;background:linear-gradient(160deg,#051008 0%,#0a1f0f 40%,#0d2e16 100%);}
+.sbi{font-family:'Scheherazade New',serif;font-size:36px;color:var(--gold);margin-bottom:4px;line-height:1.4;}
+.slo{font-family:'Scheherazade New',serif;font-size:70px;color:var(--gb);line-height:1;margin:12px 0 4px;text-shadow:0 0 40px rgba(74,204,110,0.3);}
+.sti{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--cr);letter-spacing:4px;margin-bottom:6px;}
+.ssu{font-size:12px;color:var(--mu);letter-spacing:2px;margin-bottom:40px;}
+.lc{background:rgba(15,45,20,0.6);border:1px solid rgba(45,158,78,0.3);border-radius:20px;padding:28px;width:100%;max-width:360px;backdrop-filter:blur(10px);}
+.lc h3{font-size:16px;color:var(--cr);margin-bottom:6px;}
+.lc p{font-size:12px;color:var(--mu);margin-bottom:20px;}
+.li{width:100%;padding:13px 16px;background:rgba(255,255,255,0.06);border:1px solid var(--br);border-radius:12px;color:var(--cr);font-size:16px;text-align:center;letter-spacing:3px;outline:none;font-family:'DM Sans',sans-serif;margin-bottom:12px;}
+.lb{width:100%;padding:13px;background:linear-gradient(135deg,var(--gn),var(--gl));border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.le{color:#ff8888;font-size:12px;margin-top:8px;display:none;}
+.nb{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(10,31,15,0.95);border-bottom:1px solid var(--br);backdrop-filter:blur(10px);position:sticky;top:0;z-index:100;}
+.nl{font-family:'Scheherazade New',serif;font-size:26px;color:var(--gb);}
+.nt{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--cr);letter-spacing:2px;}
+.nf{background:none;border:none;color:var(--gold);font-size:20px;cursor:pointer;padding:4px;}
+.bk{background:none;border:none;color:var(--gb);font-size:13px;cursor:pointer;padding:0;display:flex;align-items:center;gap:6px;font-family:'DM Sans',sans-serif;}
+.hh{text-align:center;padding:28px 20px 20px;background:linear-gradient(180deg,rgba(26,92,42,0.15) 0%,transparent 100%);}
+.ha{font-family:'Scheherazade New',serif;font-size:24px;color:var(--gold);line-height:1.8;margin-bottom:4px;}
+.ht{font-size:11px;color:var(--mu);font-style:italic;margin-bottom:3px;}
+.hs{font-size:10px;color:rgba(74,204,110,0.6);}
+.sw{padding:16px 20px;}
+.sb{display:flex;align-items:center;gap:10px;background:rgba(15,45,20,0.8);border:1px solid var(--br);border-radius:50px;padding:10px 18px;}
+.sb input{flex:1;background:none;border:none;outline:none;color:var(--cr);font-size:14px;font-family:'DM Sans',sans-serif;}
+.sb input::placeholder{color:var(--mu);}
+.ft{display:flex;gap:8px;padding:0 20px 16px;overflow-x:auto;scrollbar-width:none;}
+.ft::-webkit-scrollbar{display:none;}
+.fta{white-space:nowrap;padding:7px 16px;border-radius:50px;font-size:12px;border:1px solid var(--br);background:transparent;color:var(--mu);cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.fta.on{background:var(--gn);color:#fff;border-color:var(--gn);}
+.stl{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--mu);padding:0 20px 12px;}
+.tg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 20px 100px;}
+.tc{background:var(--cb);border:1px solid var(--br);border-radius:16px;padding:16px;cursor:pointer;transition:all 0.25s;}
+.tc:hover{border-color:var(--gl);}
+.te{font-size:26px;margin-bottom:7px;}
+.tna{font-family:'Scheherazade New',serif;font-size:16px;color:var(--gold);direction:rtl;text-align:right;margin-bottom:3px;}
+.tnf{font-size:12px;color:var(--cr);font-weight:500;margin-bottom:3px;}
+.tnc{font-size:10px;color:var(--mu);}
+#sd{overflow-y:auto;}
+.dh{padding:18px;text-align:center;background:linear-gradient(180deg,rgba(26,92,42,0.2) 0%,transparent 100%);border-bottom:1px solid var(--br);}
+.dhe{font-size:44px;margin-bottom:6px;}
+.dha{font-family:'Scheherazade New',serif;font-size:28px;color:var(--gold);margin-bottom:3px;}
+.dhf{font-size:15px;color:var(--cr);letter-spacing:1px;}
+.dl{padding:16px 20px 100px;}
+.dc{background:var(--cb);border:1px solid var(--br);border-radius:20px;padding:20px;margin-bottom:16px;}
+.dn{font-size:11px;color:var(--gb);font-weight:600;letter-spacing:1px;margin-bottom:12px;text-transform:uppercase;}
+.dar{font-family:'Scheherazade New',serif;font-size:24px;color:var(--cr);direction:rtl;text-align:right;line-height:2;margin-bottom:10px;border-bottom:1px solid var(--br);padding-bottom:10px;}
+.dtr{font-size:12px;color:var(--gold);font-style:italic;margin-bottom:7px;line-height:1.7;}
+.dfr{font-size:13px;color:rgba(245,240,232,0.75);line-height:1.8;margin-bottom:12px;}
+.ds{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.dba{font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid rgba(74,204,110,0.3);color:var(--gb);background:rgba(74,204,110,0.08);}
+.dac{display:flex;gap:8px;}
+.dab{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:6px 12px;color:var(--mu);font-size:12px;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.dab:hover{background:rgba(45,158,78,0.15);color:var(--gb);}
+.dab.fav{color:var(--gold);border-color:var(--gold);}
+#sf{overflow-y:auto;}
+.fh{padding:20px;text-align:center;border-bottom:1px solid var(--br);}
+.fh h2{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold);}
+.ef{text-align:center;padding:60px 20px;color:var(--mu);font-size:14px;}
+.ei{font-size:48px;margin-bottom:16px;}
+.bn{position:fixed;bottom:0;left:0;right:0;display:flex;background:rgba(10,31,15,0.97);border-top:1px solid var(--br);backdrop-filter:blur(10px);z-index:100;padding:8px 0 12px;}
+.bnb{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;cursor:pointer;color:var(--mu);font-size:10px;font-family:'DM Sans',sans-serif;}
+.bni{font-size:22px;}
+.bnb.on{color:var(--gb);}
+.tst{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--gn);color:#fff;padding:10px 24px;border-radius:50px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:opacity 0.3s;z-index:999;white-space:nowrap;}
+.tst.sh{opacity:1;}
+@media(min-width:600px){.tg{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:900px){.tg{grid-template-columns:repeat(4,1fr);}.app{max-width:900px;margin:0 auto;}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="tst" id="tst"></div>
+
+<div class="screen act" id="sl">
+  <div class="sbi">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+  <div class="slo">دُعَاء</div>
+  <div class="sti">INVOCATION</div>
+  <div class="ssu">Les douâas authentiques du musulman</div>
+  <div class="lc">
+    <h3>🔒 Accès Membres</h3>
+    <p>Entrez le mot de passe reçu après votre abonnement.</p>
+    <input type="password" class="li" id="lpwd" placeholder="Mot de passe">
+    <button class="lb" id="lbtn">Accéder</button>
+    <div class="le" id="lerr">Mot de passe incorrect.</div>
+  </div>
+</div>
+
+<div class="screen" id="sh">
+  <div class="nb">
+    <div class="nl">دُعَاء</div>
+    <div class="nt">INVOCATION</div>
+    <button class="nf" onclick="goFavs()">⭐</button>
+  </div>
+  <div class="hh">
+    <div class="ha">وَقَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ</div>
+    <div class="ht">Invoquez-Moi, Je vous répondrai</div>
+    <div class="hs">Sourate Ghafir 40:60</div>
+  </div>
+  <div class="sw"><div class="sb"><span>🔍</span><input type="text" id="srch" placeholder="Rechercher..."></div></div>
+  <div class="ft" id="ftabs"></div>
+  <div class="stl">THEMATIQUES</div>
+  <div class="tg" id="tgrid"></div>
+</div>
+
+<div class="screen" id="sd">
+  <div class="nb">
+    <button class="bk" onclick="goHome()">← Retour</button>
+    <div class="nt" id="dnavt">Theme</div>
+    <button class="nf" onclick="goFavs()">⭐</button>
+  </div>
+  <div class="dh" id="dhdr"></div>
+  <div class="dl" id="dlist"></div>
+</div>
+
+<div class="screen" id="sf">
+  <div class="nb">
+    <button class="bk" onclick="goHome()">← Retour</button>
+    <div class="nt">Favoris</div>
+    <div></div>
+  </div>
+  <div class="fh"><h2>⭐ Mes Favoris</h2></div>
+  <div class="dl" id="flist"></div>
+</div>
+
+<div class="bn" id="bnav" style="display:none;">
+  <button class="bnb on" id="bnh" onclick="goHome()"><span class="bni">🏠</span><span>Accueil</span></button>
+  <button class="bnb" id="bnf" onclick="goFavs()"><span class="bni">⭐</span><span>Favoris</span></button>
+</div>
+
+<script id="data-script" type="application/json">
+{
+  "themes": [
+    {"id":"sommeil","em":"😴","ar":"النَّوْم","fr":"Sommeil et Réveil","cat":"quotidien"},
+    {"id":"matin","em":"🌅","ar":"الصَّبَاح","fr":"Invocations du matin","cat":"quotidien"},
+    {"id":"soir","em":"🌙","ar":"الْمَسَاء","fr":"Invocations du soir","cat":"quotidien"},
+    {"id":"manger","em":"🍽️","ar":"الطَّعَام","fr":"Manger et Boire","cat":"quotidien"},
+    {"id":"maison","em":"🏠","ar":"الْبَيْت","fr":"Entrée et Sortie Maison","cat":"quotidien"},
+    {"id":"toilettes","em":"🚿","ar":"دُخُول الْخَلَاء","fr":"Toilettes","cat":"quotidien"},
+    {"id":"vetements","em":"👗","ar":"لُبْس الثِّيَاب","fr":"Shabiller","cat":"quotidien"},
+    {"id":"priere","em":"🕌","ar":"الصَّلَاة","fr":"Avant et Apres la Priere","cat":"quotidien"},
+    {"id":"woudou","em":"💧","ar":"الْوُضُوء","fr":"Ablutions Woudou","cat":"quotidien"},
+    {"id":"azan","em":"📣","ar":"الأَذَان","fr":"Appel a la Priere","cat":"quotidien"},
+    {"id":"apres_salat","em":"📿","ar":"أَذْكَار بَعْد الصَّلَاة","fr":"Dhikr apres la Salat","cat":"quotidien"},
+    {"id":"istighfar","em":"🤲","ar":"الاِسْتِغْفَار","fr":"Repentir et Istighfar","cat":"quotidien"},
+    {"id":"salawat","em":"📿","ar":"الصَّلَاة عَلَى النَّبِي","fr":"Salawat sur le Prophete","cat":"quotidien"},
+    {"id":"benediction","em":"✨","ar":"الْبَرَكَة","fr":"Benediction et Baraka","cat":"quotidien"},
+    {"id":"gratitude","em":"🙏","ar":"الشُّكْر","fr":"Gratitude et Remerciements","cat":"quotidien"},
+    {"id":"guidance","em":"🌟","ar":"الْهِدَايَة","fr":"Guidance et Droiture","cat":"quotidien"},
+    {"id":"miroir","em":"🪞","ar":"النَّظَر فِي الْمِرْآة","fr":"En se regardant dans le miroir","cat":"quotidien"},
+    {"id":"bon_reve","em":"🌈","ar":"الرُّؤْيَا","fr":"Bon Reve","cat":"quotidien"},
+    {"id":"voyage","em":"✈️","ar":"السَّفَر","fr":"Voyage","cat":"voyage"},
+    {"id":"vehicule","em":"🚗","ar":"رُكُوب السَّيَّارَة","fr":"Monter dans un vehicule","cat":"voyage"},
+    {"id":"arrivee","em":"🏁","ar":"الْقُدُوم","fr":"Arrivee en ville","cat":"voyage"},
+    {"id":"marche","em":"🚶","ar":"الْمَشْي","fr":"En chemin","cat":"voyage"},
+    {"id":"maladie","em":"🤕","ar":"الْمَرَض","fr":"Maladie et Guerison","cat":"sante"},
+    {"id":"anxiete","em":"😟","ar":"الْقَلَق","fr":"Anxiete et Tristesse","cat":"sante"},
+    {"id":"colere","em":"😠","ar":"الْغَضَب","fr":"Maitriser la Colere","cat":"sante"},
+    {"id":"patience","em":"🌱","ar":"الصَّبْر","fr":"Patience et Perseverance","cat":"sante"},
+    {"id":"visite_malade","em":"🏥","ar":"عِيَادَة الْمَرِيض","fr":"Visite au Malade","cat":"sante"},
+    {"id":"mariage","em":"💍","ar":"الزَّوَاج","fr":"Mariage","cat":"famille"},
+    {"id":"enfants","em":"👶","ar":"الأَوْلَاد","fr":"Enfants et Naissance","cat":"famille"},
+    {"id":"parents","em":"👴","ar":"الْوَالِدَان","fr":"Bienveillance envers les Parents","cat":"famille"},
+    {"id":"deces","em":"🕊️","ar":"الْمَوْت","fr":"Deces et Condoleances","cat":"famille"},
+    {"id":"cimetiere","em":"⚱️","ar":"زِيَارَة الْقُبُور","fr":"Visite du Cimetiere","cat":"famille"},
+    {"id":"travail","em":"💼","ar":"الْعَمَل","fr":"Travail et Reussite","cat":"travail"},
+    {"id":"examen","em":"📚","ar":"الاِمْتِحَان","fr":"Examens et Etudes","cat":"travail"},
+    {"id":"rizq","em":"💰","ar":"الرِّزْق","fr":"Rizq et Subsistance","cat":"travail"},
+    {"id":"connaissance","em":"🧠","ar":"الْعِلْم","fr":"Demander la Science","cat":"travail"},
+    {"id":"dette","em":"📋","ar":"الدَّيْن","fr":"Dettes","cat":"travail"},
+    {"id":"ruqya","em":"🛡️","ar":"الرُّقْيَة","fr":"Ruqya et Protection","cat":"protection"},
+    {"id":"mauvailoeil","em":"👁️","ar":"الْحَسَد","fr":"Mauvais Oeil et Envie","cat":"protection"},
+    {"id":"shaytan","em":"🔥","ar":"الشَّيْطَان","fr":"Protection contre Shaytan","cat":"protection"},
+    {"id":"cauchemar","em":"😱","ar":"الْكَابُوس","fr":"Cauchemar et Mauvais Reve","cat":"protection"},
+    {"id":"peur_nuit","em":"🌃","ar":"الْخَوْف","fr":"Peur de la Nuit","cat":"protection"},
+    {"id":"fatiha","em":"📖","ar":"سُورَة الْفَاتِحَة","fr":"Sourate Al-Fatiha","cat":"coran"},
+    {"id":"ayat_kursi","em":"👑","ar":"آيَة الْكُرْسِي","fr":"Ayat Al-Kursi","cat":"coran"},
+    {"id":"ikhlas","em":"☀️","ar":"سُورَة الإِخْلَاص","fr":"Sourate Al-Ikhlas","cat":"coran"},
+    {"id":"falaq","em":"🌄","ar":"سُورَة الْفَلَق","fr":"Sourate Al-Falaq","cat":"coran"},
+    {"id":"nas","em":"🌊","ar":"سُورَة النَّاس","fr":"Sourate An-Nas","cat":"coran"},
+    {"id":"yunus_dua","em":"🐋","ar":"دُعَاء يُونُس","fr":"Douaa de Jonas Yunus","cat":"coran"},
+    {"id":"ibrahim_dua","em":"🕋","ar":"دُعَاء إِبْرَاهِيم","fr":"Douaas d Ibrahim","cat":"coran"},
+    {"id":"istikhar","em":"🎯","ar":"الاِسْتِخَارَة","fr":"Priere Istikharah","cat":"special"},
+    {"id":"qunut","em":"🤲","ar":"الْقُنُوت","fr":"Douaa Qunout","cat":"special"},
+    {"id":"laylat_qadr","em":"🌟","ar":"لَيْلَة الْقَدْر","fr":"Nuit du Destin","cat":"special"},
+    {"id":"ramadan","em":"🌙","ar":"رَمَضَان","fr":"Ramadan","cat":"special"},
+    {"id":"vendredi","em":"📅","ar":"يَوْم الْجُمُعَة","fr":"Jour du Vendredi","cat":"special"},
+    {"id":"hajj","em":"🕋","ar":"الْحَجّ","fr":"Hajj et Omra","cat":"special"},
+    {"id":"pluie","em":"🌧️","ar":"الْمَطَر","fr":"Pluie et Meteo","cat":"nature"},
+    {"id":"vent","em":"💨","ar":"الرِّيح","fr":"Vent et Tempete","cat":"nature"},
+    {"id":"foudre","em":"⚡","ar":"الرَّعْد","fr":"Tonnerre et Eclair","cat":"nature"}
+  ],
+  "douaas": {
+    "sommeil": [
+      {"ar":"بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا","tr":"Bismika Llâhumma amûtu wa ahyâ","fr":"En Ton nom, o Allah, je meurs et je vis.","src":"Boukhari 6324","auth":"Sahih"},
+      {"ar":"اللَّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ","tr":"Allâhumma qinî adhâbaka yawma tab-athu ibâdak","fr":"O Allah, préserve-moi de Ton châtiment le Jour où Tu ressusciteras Tes serviteurs.","src":"Abou Daoud 5045","auth":"Sahih"},
+      {"ar":"اللَّهُمَّ بِاسْمِكَ أَحْيَا وَبِاسْمِكَ أَمُوتُ","tr":"Allâhumma bismika ahyâ wa bismika amût","fr":"O Allah, en Ton nom je vis et en Ton nom je meurs.","src":"Muslim 2711","auth":"Sahih"},
+      {"ar":"سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَاللَّهُ أَكْبَرُ","tr":"Subhânallâh (33x) — Alhamdu lillâh (33x) — Allâhu akbar (33x)","fr":"Gloire à Allah (33x) — Louange à Allah (33x) — Allah est le Plus Grand (33x). À lire avant de dormir.","src":"Boukhari 3705","auth":"Sahih"}
+    ],
+    "matin": [
+      {"ar":"أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ وَالْحَمْدُ لِلَّهِ","tr":"Asbahna wa asbahal-mulku lillâh, wal-hamdu lillâh","fr":"Nous avons accueilli le matin et le royaume appartient à Allah, louange à Allah.","src":"Muslim 2723","auth":"Sahih"},
+      {"ar":"اللَّهُمَّ بِكَ أَصْبَحْنَا وَبِكَ أَمْسَيْنَا وَبِكَ نَحْيَا وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ","tr":"Allâhumma bika asbahna wa bika amsayna wa bika nahya wa bika namûtu wa ilaykan-nushûr","fr":"O Allah, grâce à Toi nous accueillons le matin, grâce à Toi nous abordons le soir, grâce à Toi nous vivons et mourons, et vers Toi sera la résurrection.","src":"Tirmidhi 3391","auth":"Sahih"},
+      {"ar":"اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ","tr":"Allâhumma anta rabbî lâ ilâha illâ anta, khalaqtanî wa ana abduk","fr":"O Allah, Tu es mon Seigneur, il n y a pas de divinité sauf Toi. Tu m as créé et je suis Ton serviteur. (Sayyid Al-Istighfar — meilleure demande de pardon)","src":"Boukhari 6306","auth":"Sahih"}
+    ],
+    "soir": [
+      {"ar":"أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ وَالْحَمْدُ لِلَّهِ","tr":"Amsayna wa amsal-mulku lillâh, wal-hamdu lillâh","fr":"Nous avons abordé le soir et le royaume appartient à Allah, louange à Allah.","src":"Muslim 2723","auth":"Sahih"},
+      {"ar":"اللَّهُمَّ بِكَ أَمْسَيْنَا وَبِكَ أَصْبَحْنَا وَبِكَ نَحْيَا وَبِكَ نَمُوتُ وَإِلَيْكَ الْمَصِيرُ","tr":"Allâhumma bika amsaynâ wa bika asbahna wa bika nahya wa bika namûtu wa ilaykal-masîr","fr":"O Allah, grâce à Toi nous abordons le soir, grâce à Toi nous accueillons le matin, grâce à Toi nous vivons et mourons, et vers Toi sera le retour.","src":"Tirmidhi 3391","auth":"Sahih"},
+      {"ar":"حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ","tr":"Hasbiyallâhu lâ ilâha illâ huwa alayhi tawakkaltu wa huwa rabbul-arshil-azîm (7x)","fr":"Allah me suffit, il n y a pas de divinité en dehors de Lui. En Lui je me confie et Il est le Seigneur du Trône immense. (7 fois)","src":"Abou Daoud 5081","auth":"Sahih"}
+    ],
+    "manger": [
+      {"ar":"بِسْمِ اللَّهِ","tr":"Bismillâh","fr":"Au nom d Allah. A dire avant de manger.","src":"Boukhari 5376","auth":"Sahih"},
+      {"ar":"بِسْمِ اللَّهِ فِي أَوَّلِهِ وَآخِرِهِ","tr":"Bismillâhi fî awwalihi wa âkhirihi","fr":"Au nom d Allah au début et à la fin. Si on a oublié la Basmala au début du repas.","src":"Abou Daoud 3767","auth":"Sahih"},
+      {"ar":"الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ","tr":"Al-hamdu lillâhilladhî at-amanî hâdhâ wa razaqanîhi min ghayri hawlin minnî wa lâ quwwah","fr":"Louange à Allah qui m a nourri de ceci et me l a accordé sans aucune force ni puissance de ma part.","src":"Abou Daoud 4023","auth":"Sahih"}
+    ],
+    "voyage": [
+      {"ar":"اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَىٰ رَبِّنَا لَمُنقَلِبُونَ","tr":"Allâhu Akbar (3x), Subhânalladhî sakhkhara lanâ hâdhâ...","fr":"Allah est le Plus Grand (3x), Gloire à Celui qui a mis cela à notre service alors que nous n aurions pu le faire. En effet, c est vers notre Seigneur que nous retournerons.","src":"Muslim 1342","auth":"Sahih"},
+      {"ar":"اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى وَمِنَ الْعَمَلِ مَا تَرْضَى","tr":"Allâhumma innâ nas-aluka fî safarinâ hadhal-birra wat-taqwâ","fr":"O Allah, nous Te demandons dans ce voyage la bonté et la piété, et des actes qui Te plaisent.","src":"Muslim 1342","auth":"Sahih"},
+      {"ar":"اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ وَالْخَلِيفَةُ فِي الْأَهْلِ","tr":"Allâhumma antas-sâhibu fis-safari wal-khalîfatu fil-ahl","fr":"O Allah, Tu es le Compagnon dans le voyage et le Successeur auprès de la famille.","src":"Muslim 1342","auth":"Sahih"}
+    ],
+    "maladie": [
+      {"ar":"اللَّهُمَّ رَبَّ النَّاسِ، أَذْهِبِ الْبَأْسَ، اشْفِ أَنْتَ الشَّافِي، لَا شِفَاءَ إِلَّا شِفَاؤُكَ","tr":"Allâhumma Rabban-nâs, adh-hibil-ba-s, ishfi antash-shâfî, lâ shifâa illâ shifâuk","fr":"O Allah, Seigneur des hommes, éloigne la souffrance, guéris — Tu es le Guérisseur, il n y a pas de guérison sauf la Tienne.","src":"Boukhari 5743","auth":"Sahih"},
+      {"ar":"أَسْأَلُ اللَّهَ الْعَظِيمَ رَبَّ الْعَرْشِ الْعَظِيمِ أَنْ يَشْفِيَكَ","tr":"As-alullâhal-azîma Rabbal-arshil-azîmi an yashfiyak (7x)","fr":"Je demande à Allah le Tout-Puissant, Seigneur du Trône immense, de te guérir. A dire 7 fois en visitant un malade.","src":"Abou Daoud 3106","auth":"Sahih"}
+    ],
+    "anxiete": [
+      {"ar":"لَا إِلَهَ إِلَّا اللَّهُ الْعَظِيمُ الْحَلِيمُ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ الْعَرْشِ الْعَظِيمِ","tr":"Lâ ilâha illallâhul-azîmul-halîm, lâ ilâha illallâhu rabbul-arshil-azîm","fr":"Il n y a pas de divinité sauf Allah le Grand le Doux, il n y a pas de divinité sauf Allah le Seigneur du Trône immense.","src":"Boukhari 6346","auth":"Sahih"},
+      {"ar":"اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ وَالْعَجْزِ وَالْكَسَلِ","tr":"Allâhumma innî a-ûdhu bika minal-hammi wal-hazan wal-ajzi wal-kasal","fr":"O Allah, je cherche refuge en Toi contre l inquiétude, la tristesse, l incapacité et la paresse.","src":"Boukhari 6369","auth":"Sahih"}
+    ],
+    "ayat_kursi": [
+      {"ar":"اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ","tr":"Allâhu lâ ilâha illâ huwal-hayyul-qayyûm, lâ ta-khudhuhu sinatun wa lâ nawm...","fr":"Allah, point de divinité à part Lui, le Vivant, Celui qui subsiste par Lui-même. Ni somnolence ni sommeil ne Le saisissent. A Lui appartient tout ce qui est dans les cieux et sur la terre. (Al-Baqara 2:255)","src":"Al-Baqara 2:255","auth":"Coran"}
+    ],
+    "ikhlas": [
+      {"ar":"قُلْ هُوَ اللَّهُ أَحَدٌ اللَّهُ الصَّمَدُ لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ","tr":"Qul huwallâhu ahad. Allâhus-samad. Lam yalid wa lam yûlad. Wa lam yakun lahû kufuwan ahad.","fr":"Dis: Il est Allah, Unique. Allah, le Seul à être imploré. Il n a pas engendré et n a pas été engendré. Et nul n est égal à Lui.","src":"Sourate Al-Ikhlas 112","auth":"Coran"}
+    ],
+    "falaq": [
+      {"ar":"قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ مِن شَرِّ مَا خَلَقَ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ","tr":"Qul a-ûdhu bi-rabbil-falaq, min sharri mâ khalaq...","fr":"Dis: Je cherche protection auprès du Seigneur de l Aube naissante, contre le mal de ce qu Il a créé, contre le mal de l obscurité, contre le mal de celles qui soufflent sur les noeuds, contre le mal de l envieux.","src":"Sourate Al-Falaq 113","auth":"Coran"}
+    ],
+    "nas": [
+      {"ar":"قُلْ أَعُوذُ بِرَبِّ النَّاسِ مَلِكِ النَّاسِ إِلَٰهِ النَّاسِ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ مِنَ الْجِنَّةِ وَالنَّاسِ","tr":"Qul a-ûdhu bi-rabbin-nâs, malikin-nâs, ilâhin-nâs...","fr":"Dis: Je cherche protection auprès du Seigneur des hommes, du Roi des hommes, du Dieu des hommes, contre le mal du mauvais conseiller qui se dérobe, qui souffle le mal dans les coeurs des hommes, qu il soit djinn ou homme.","src":"Sourate An-Nas 114","auth":"Coran"}
+    ],
+    "yunus_dua": [
+      {"ar":"لَا إِلَٰهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ","tr":"Lâ ilâha illâ anta subhânaka innî kuntu minaz-zâlimîn","fr":"Point de divinité en dehors de Toi ! Gloire à Toi ! J ai vraiment été du nombre des injustes. Douaa de Yunus dans le ventre de la baleine.","src":"Al-Anbiya 21:87","auth":"Coran"}
+    ],
+    "istikhar": [
+      {"ar":"اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ فَإِنَّكَ تَقْدِرُ وَلَا أَقْدِرُ وَتَعْلَمُ وَلَا أَعْلَمُ وَأَنْتَ عَلَّامُ الْغُيُوبِ","tr":"Allâhumma innî astakhîruka bi-ilmik, wa astaqidiruka biqudratik, wa as-aluka min fadlikal-azîm...","fr":"O Allah, je Te demande le meilleur grâce à Ta science, je Te demande la capacité grâce à Ta puissance, et je Te demande de Ton immense faveur. Car Tu es capable et je ne le suis pas, Tu sais et je ne sais pas, et Tu connais les choses cachées.","src":"Boukhari 1166","auth":"Sahih"}
+    ],
+    "ruqya": [
+      {"ar":"بِسْمِ اللَّهِ أَرْقِيكَ مِنْ كُلِّ شَيْءٍ يُؤْذِيكَ مِنْ شَرِّ كُلِّ نَفْسٍ أَوْ عَيْنٍ حَاسِدٍ اللَّهُ يَشْفِيكَ","tr":"Bismillâhi arqîk, min kulli shay-in yu-dhîk...","fr":"Au nom d Allah je te fais la Ruqya, de tout ce qui te nuit, du mal de toute âme ou d un oeil jaloux. Allah te guérisse.","src":"Muslim 2186","auth":"Sahih"},
+      {"ar":"أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ","tr":"A-ûdhu bikalimâtillâhit-tâmmâti min sharri mâ khalaq (3x)","fr":"Je cherche refuge dans les paroles parfaites d Allah contre le mal de ce qu Il a créé. A dire 3 fois le soir et dans un lieu inconnu.","src":"Muslim 2708","auth":"Sahih"}
+    ],
+    "salawat": [
+      {"ar":"اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ","tr":"Allâhumma salli alâ Muhammad wa alâ âli Muhammad kamâ sallayta alâ Ibrâhîm innaka hamîdun majîd","fr":"O Allah, envoie Tes bénédictions sur Muhammad et sur la famille de Muhammad, comme Tu les as envoyées sur Ibrahim et sur la famille d Ibrahim.","src":"Boukhari 3370","auth":"Sahih"},
+      {"ar":"اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ النَّبِيِّ الأُمِّيِّ وَعَلَى آلِهِ وَسَلِّمْ","tr":"Allâhumma salli alâ Muhammadin-nabiyyil-ummiyyi wa alâ âlihi wa sallim","fr":"O Allah, bénis Muhammad le Prophète illettré et sa famille et accorde-lui la paix.","src":"Abou Daoud 976","auth":"Sahih"}
+    ],
+    "maison": [
+      {"ar":"بِسْمِ اللَّهِ وَلَجْنَا وَبِسْمِ اللَّهِ خَرَجْنَا وَعَلَى اللَّهِ رَبِّنَا تَوَكَّلْنَا","tr":"Bismillâhi walajna wa bismillâhi kharajna wa alallâhi rabbinâ tawakkalnâ","fr":"Au nom d Allah nous entrons, au nom d Allah nous sortons et en Allah notre Seigneur nous nous confions.","src":"Abou Daoud 5096","auth":"Sahih"},
+      {"ar":"اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ الْمَوْلِجِ وَخَيْرَ الْمَخْرَجِ","tr":"Allâhumma innî as-aluka khayral-mawliji wa khayral-makhraj","fr":"O Allah, je Te demande le bien de l entrée et le bien de la sortie.","src":"Abou Daoud 5095","auth":"Sahih"}
+    ],
+    "toilettes": [
+      {"ar":"اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ","tr":"Allâhumma innî a-ûdhu bika minal-khubuthi wal-khabâ-ith","fr":"O Allah, je cherche refuge en Toi contre les diables males et femelles.","src":"Boukhari 142","auth":"Sahih"},
+      {"ar":"غُفْرَانَكَ","tr":"Ghufrânak","fr":"Ton pardon (à dire en sortant des toilettes).","src":"Abou Daoud 30","auth":"Sahih"}
+    ],
+    "vetements": [
+      {"ar":"الْحَمْدُ لِلَّهِ الَّذِي كَسَانِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ","tr":"Al-hamdu lillâhilladhî kasânî hâdhâ wa razaqanîhi min ghayri hawlin minnî wa lâ quwwah","fr":"Louange à Allah qui m a vêtu de ceci et me l a accordé sans aucune force ni puissance de ma part.","src":"Abou Daoud 4023","auth":"Sahih"}
+    ],
+    "priere": [
+      {"ar":"اللَّهُمَّ اجْعَلْ فِي قَلْبِي نُورًا وَفِي لِسَانِي نُورًا وَفِي سَمْعِي نُورًا","tr":"Allâhumma-jal fî qalbî nûran wa fî lisânî nûran wa fî sam-î nûran","fr":"O Allah, mets de la lumière dans mon coeur, dans ma langue, dans mon ouïe...","src":"Muslim 763","auth":"Sahih"},
+      {"ar":"سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ وَتَبَارَكَ اسْمُكَ وَتَعَالَى جَدُّكَ وَلَا إِلَهَ غَيْرُكَ","tr":"Subhânakallâhumma wa bihamdika wa tabârakasmuka wa ta-âlâ jadduka wa lâ ilâha ghayruk","fr":"Gloire à Toi o Allah et avec Ta louange, béni soit Ton nom, exalté soit Ta grandeur et il n y a pas de divinité en dehors de Toi.","src":"Tirmidhi 243","auth":"Sahih"}
+    ],
+    "woudou": [
+      {"ar":"بِسْمِ اللَّهِ","tr":"Bismillâh","fr":"Au nom d Allah. A dire au début des ablutions.","src":"Abou Daoud 101","auth":"Sahih"},
+      {"ar":"أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ","tr":"Ash-hadu an lâ ilâha illallâhu wahdahu lâ sharîka lahu wa ash-hadu anna Muhammadan abduhu wa rasûluh","fr":"Je témoigne qu il n y a pas de divinité en dehors d Allah seul sans associé et je témoigne que Muhammad est Son serviteur et Son messager. A dire après les ablutions.","src":"Muslim 234","auth":"Sahih"}
+    ],
+    "azan": [
+      {"ar":"اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ وَالصَّلَاةِ الْقَائِمَةِ آتِ مُحَمَّدًا الْوَسِيلَةَ وَالْفَضِيلَةَ","tr":"Allâhumma Rabba hâdhihid-da-watit-tâmmah was-salâtil-qâ-imah âti Muhammadanil-wasîlata wal-fadîlah","fr":"O Allah, Seigneur de cet appel parfait et de cette prière imminente, accorde à Muhammad la Wasîla et la Fadîla...","src":"Boukhari 614","auth":"Sahih"}
+    ],
+    "apres_salat": [
+      {"ar":"أَسْتَغْفِرُ اللَّهَ (3x) اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالإِكْرَامِ","tr":"Astaghfirullâh (3x) Allâhumma antas-salâmu wa minkas-salâmu tabârakta yâ dhal-jalâli wal-ikrâm","fr":"Je demande pardon à Allah (3x). O Allah, Tu es la Paix et de Toi vient la paix, Tu es béni o Seigneur de la Majesté et de la Générosité.","src":"Muslim 591","auth":"Sahih"},
+      {"ar":"لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ","tr":"Lâ ilâha illallâhu wahdahu lâ sharîka lah, lahul-mulku wa lahul-hamdu wa huwa alâ kulli shay-in qadîr","fr":"Il n y a pas de divinité en dehors d Allah seul sans associé, à Lui la royauté et la louange et Il est Puissant sur toute chose.","src":"Muslim 594","auth":"Sahih"}
+    ],
+    "istighfar": [
+      {"ar":"أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ الَّذِي لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ","tr":"Astaghfirullâhal-azîmalladhî lâ ilâha illâ huwal-hayyul-qayyûmu wa atûbu ilayh","fr":"Je demande pardon à Allah le Tout-Puissant en dehors de qui il n y a pas de divinité, le Vivant, le Subsistant, et je me repens à Lui.","src":"Abou Daoud 1517","auth":"Sahih"},
+      {"ar":"رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ","tr":"Rabbigh-fir lî wa tub alayya innaka antat-tawwâbur-rahîm","fr":"Seigneur, pardonne-moi et accepte mon repentir. Tu es certes Celui qui pardonne et le Miséricordieux.","src":"Abou Daoud 1516","auth":"Sahih"}
+    ],
+    "benediction": [
+      {"ar":"اللَّهُمَّ بَارِكْ لَنَا فِيمَا رَزَقْتَنَا وَقِنَا عَذَابَ النَّارِ","tr":"Allâhumma bârik lanâ fîmâ razaqtanâ wa qinâ adhâban-nâr","fr":"O Allah, bénis-nous dans ce que Tu nous as accordé comme subsistance et préserve-nous du châtiment du Feu.","src":"Ibn Sunni","auth":"Hasan"},
+      {"ar":"اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا طَيِّبًا وَعَمَلًا مُتَقَبَّلًا","tr":"Allâhumma innî as-aluka ilman nâfi-an wa rizqan tayyiban wa amalan mutaqabbalâ","fr":"O Allah, je Te demande une science utile, une subsistance bonne et une oeuvre acceptée.","src":"Ibn Majah 925","auth":"Sahih"}
+    ],
+    "gratitude": [
+      {"ar":"الْحَمْدُ لِلَّهِ عَلَى كُلِّ حَالٍ","tr":"Al-hamdu lillâhi alâ kulli hâl","fr":"Louange à Allah dans toutes les situations.","src":"Ibn Majah 3803","auth":"Sahih"},
+      {"ar":"اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ","tr":"Allâhumma a-innî alâ dhikrika wa shukrika wa husni ibâdatik","fr":"O Allah, aide-moi à Te mentionner, à T être reconnaissant et à T adorer de belle façon.","src":"Abou Daoud 1522","auth":"Sahih"}
+    ],
+    "guidance": [
+      {"ar":"اللَّهُمَّ اهْدِنِي وَسَدِّدْنِي","tr":"Allâhummahdinî wa saddidnî","fr":"O Allah, guide-moi et dirige-moi dans la voie juste.","src":"Muslim 2725","auth":"Sahih"},
+      {"ar":"رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً","tr":"Rabbanâ lâ tuzigh qulûbanâ ba-da idh hadaytanâ wa hab lanâ min ladunka rahmah","fr":"Seigneur, ne laisse pas nos coeurs se détourner après que Tu nous aies guidés et accorde-nous une miséricorde de Ta part.","src":"Al-Imran 3:8","auth":"Coran"}
+    ],
+    "miroir": [
+      {"ar":"اللَّهُمَّ أَنْتَ حَسَّنْتَ خَلْقِي فَأَحْسِنْ خُلُقِي","tr":"Allâhumma anta hassanta khalqî fa-ahsin khuluqî","fr":"O Allah, Tu as embelli ma création alors embellis mon caractère.","src":"Ahmad 3823","auth":"Sahih"},
+      {"ar":"الْحَمْدُ لِلَّهِ الَّذِي سَوَّى خَلْقِي فَعَدَّلَهُ وَكَرَّمَ صُورَةَ وَجْهِي","tr":"Al-hamdu lillâhilladhî sawwâ khalqî fa-addalahu wa karrama sûrata wajhî","fr":"Louange à Allah qui a harmonisé ma création, l a rendue droite et a honoré mon visage.","src":"Ibn Sunni 167","auth":"Hasan"}
+    ],
+    "bon_reve": [
+      {"ar":"الْحَمْدُ لِلَّهِ","tr":"Al-hamdu lillâh","fr":"Louange à Allah. A dire quand on a un bon reve.","src":"Boukhari 6986","auth":"Sahih"}
+    ],
+    "vehicule": [
+      {"ar":"بِسْمِ اللَّهِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ أَنْ أَضِلَّ أَوْ أُضَلَّ","tr":"Bismillâh, Allâhumma innî a-ûdhu bika an adilla aw udall","fr":"Au nom d Allah. O Allah, je cherche refuge en Toi contre le fait de m égarer ou d etre égaré.","src":"Abou Daoud 5094","auth":"Sahih"}
+    ],
+    "arrivee": [
+      {"ar":"اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا وَخَيْرَ أَهْلِهَا وَأَعُوذُ بِكَ مِنْ شَرِّهَا وَشَرِّ أَهْلِهَا","tr":"Allâhumma innî as-aluka khayrahâ wa khayra ahlihâ wa a-ûdhu bika min sharrihâ wa sharri ahliha","fr":"O Allah, je Te demande le bien de cette ville et le bien de ses habitants, et je cherche refuge en Toi contre le mal de cette ville et le mal de ses habitants.","src":"Muslim 1342","auth":"Sahih"}
+    ],
+    "marche": [
+      {"ar":"رَبِّ أَدْخِلْنِي مُدْخَلَ صِدْقٍ وَأَخْرِجْنِي مُخْرَجَ صِدْقٍ وَاجْعَل لِّي مِن لَّدُنكَ سُلْطَانًا نَّصِيرًا","tr":"Rabbi adkhilnî mudkhala sidqin wa akhrijni mukhraja sidqin wajal lî min ladunka sultânan nasîrâ","fr":"Seigneur, fais-moi entrer d une entrée sincere et fais-moi sortir d une sortie sincere et accorde-moi de Ta part un pouvoir secourable.","src":"Al-Isra 17:80","auth":"Coran"}
+    ],
+    "colere": [
+      {"ar":"أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ","tr":"A-ûdhu billâhi minash-shaytânir-rajîm","fr":"Je cherche refuge en Allah contre le diable maudit. A dire quand on est en colere.","src":"Boukhari 6115","auth":"Sahih"}
+    ],
+    "patience": [
+      {"ar":"إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ","tr":"Innâ lillâhi wa innâ ilayhi râji-ûn","fr":"Nous appartenons à Allah et c est vers Lui que nous retournerons. A dire lors d une épreuve.","src":"Al-Baqara 2:156","auth":"Coran"},
+      {"ar":"اللَّهُمَّ أَجِرْنِي فِي مُصِيبَتِي وَأَخْلِفْ لِي خَيْرًا مِنْهَا","tr":"Allâhumma ajurnî fî musîbatî wa akhlif lî khayran minhâ","fr":"O Allah, récompense-moi pour mon épreuve et remplace-la pour moi par quelque chose de meilleur.","src":"Muslim 918","auth":"Sahih"}
+    ],
+    "visite_malade": [
+      {"ar":"لَا بَأْسَ طَهُورٌ إِنْ شَاءَ اللَّهُ","tr":"Lâ ba-sa tahûrun in shâ-allâh","fr":"Pas de probleme, c est une purification si Allah veut. A dire au malade.","src":"Boukhari 3616","auth":"Sahih"},
+      {"ar":"اللَّهُمَّ اشْفِ عَبْدَكَ يَنْكَأُ لَكَ عَدُوًّا أَوْ يَمْشِي لَكَ إِلَى صَلَاةٍ","tr":"Allâhumma ushfi abdaka yanka-u laka aduwwan aw yamshî laka ilâ salâh","fr":"O Allah, guéris Ton serviteur afin qu il blesse un ennemi pour Toi ou marche vers la priere pour Toi.","src":"Abou Daoud 3107","auth":"Sahih"}
+    ],
+    "mariage": [
+      {"ar":"بَارَكَ اللَّهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ","tr":"Bârakallâhu laka wa bâraka alayka wa jama-a baynakumâ fî khayr","fr":"Qu Allah vous bénisse et répande Sa bénédiction sur vous et vous réunisse dans le bien. A dire aux mariés.","src":"Abou Daoud 2130","auth":"Sahih"},
+      {"ar":"اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا وَخَيْرَ مَا جَبَلْتَهَا عَلَيْهِ","tr":"Allâhumma innî as-aluka khayrahâ wa khayra mâ jabaltahâ alayh","fr":"O Allah, je Te demande le bien en elle et le bien de ce sur quoi Tu l as créée.","src":"Abou Daoud 2160","auth":"Sahih"}
+    ],
+    "enfants": [
+      {"ar":"اللَّهُمَّ إِنِّي أُعِيذُهَا بِكَ وَذُرِّيَّتَهَا مِنَ الشَّيْطَانِ الرَّجِيمِ","tr":"Allâhumma innî u-îdhuhâ bika wa dhurriyyatahâ minash-shaytânir-rajîm","fr":"O Allah, je la place sous Ta protection, elle et sa descendance, contre le diable maudit. Douaa pour proteger un nouveau-né.","src":"Boukhari 3431","auth":"Sahih"},
+      {"ar":"رَبِّ هَبْ لِي مِن لَّدُنكَ ذُرِّيَّةً طَيِّبَةً إِنَّكَ سَمِيعُ الدُّعَاءِ","tr":"Rabbi hab lî min ladunka dhurriyyatan tayyibatan innaka samî-ud-du-â","fr":"Seigneur, accorde-moi de Ta part une bonne descendance. Tu es certes Celui qui entend les invocations.","src":"Al-Imran 3:38","auth":"Coran"}
+    ],
+    "parents": [
+      {"ar":"رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا","tr":"Rabbigh-fir lî wa liwâlidayya warhamhumâ kamâ rabbayânî saghîrâ","fr":"Seigneur, pardonne-moi ainsi qu à mes deux parents et aie pitié d eux comme ils m ont élevé lorsque j étais petit.","src":"Al-Isra 17:24","auth":"Coran"},
+      {"ar":"رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَى وَالِدَيَّ","tr":"Rabbi awzi-nî an ashkura ni-matakalllatî an-amta alayya wa alâ wâlidayya","fr":"Seigneur, inspire-moi d etre reconnaissant envers Tes bienfaits dont Tu m as comblé ainsi que mes parents.","src":"An-Naml 27:19","auth":"Coran"}
+    ],
+    "deces": [
+      {"ar":"إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ، اللَّهُمَّ أْجُرْنِي فِي مُصِيبَتِي","tr":"Innâ lillâhi wa innâ ilayhi râji-ûn, Allâhumma-jurni fî musîbatî","fr":"Nous appartenons à Allah et c est vers Lui que nous retournerons. O Allah, récompense-moi dans mon épreuve.","src":"Muslim 918","auth":"Sahih"},
+      {"ar":"اللَّهُمَّ اغْفِرْ لَهُ وَارْحَمْهُ وَعَافِهِ وَاعْفُ عَنْهُ","tr":"Allâhumma-ghfir lahu warhamhu wa âfihi wa-fu anh","fr":"O Allah, pardonne-lui, aie pitié de lui, accorde-lui la santé et pardonne-lui ses péchés. Douaa pour le défunt.","src":"Muslim 963","auth":"Sahih"}
+    ],
+    "cimetiere": [
+      {"ar":"السَّلَامُ عَلَيْكُمْ أَهْلَ الدِّيَارِ مِنَ الْمُؤْمِنِينَ وَالْمُسْلِمِينَ وَإِنَّا إِنْ شَاءَ اللَّهُ بِكُمْ لَاحِقُونَ","tr":"As-salâmu alaykum ahlad-diyâri minal-mu-minîna wal-muslimîn wa innâ in shâ-allâhu bikum lâhiqûn","fr":"Que la paix soit sur vous habitants de ces demeures parmi les croyants et les musulmans. Nous vous rejoindrons si Allah veut.","src":"Muslim 975","auth":"Sahih"}
+    ],
+    "travail": [
+      {"ar":"اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ فِي الدُّنْيَا وَالآخِرَةِ","tr":"Allâhumma innî as-alukal-âfiyata fid-dunyâ wal-âkhirah","fr":"O Allah, je Te demande la santé et le bien-etre dans ce monde et dans l Au-delà.","src":"Abou Daoud 5074","auth":"Sahih"},
+      {"ar":"رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي","tr":"Rabbish-rah lî sadrî wa yassir lî amrî","fr":"Seigneur, ouvre ma poitrine et facilite-moi ma tâche.","src":"Ta-Ha 20:25-26","auth":"Coran"}
+    ],
+    "examen": [
+      {"ar":"رَبِّ زِدْنِي عِلْمًا","tr":"Rabbi zidnî ilmâ","fr":"Seigneur, accroît mes connaissances.","src":"Ta-Ha 20:114","auth":"Coran"},
+      {"ar":"اللَّهُمَّ لَا سَهْلَ إِلَّا مَا جَعَلْتَهُ سَهْلًا وَأَنْتَ تَجْعَلُ الْحَزْنَ إِذَا شِئْتَ سَهْلًا","tr":"Allâhumma lâ sahla illâ mâ ja-altahu sahlan wa anta taj-alul-hazna idhâ shi-ta sahlâ","fr":"O Allah, rien n est facile sauf ce que Tu rends facile, et Tu peux rendre facile ce qui est difficile si Tu veux.","src":"Ibn Hibban 2427","auth":"Sahih"}
+    ],
+    "rizq": [
+      {"ar":"اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ","tr":"Allâhumma-kfinî bihalâlika an harâmika wa aghnini bifadlika amman siwâk","fr":"O Allah, rends-moi suffisant par ce qui est licite de sorte que je n aie pas besoin de ce qui est illicite, et rends-moi suffisant par Ta grâce de sorte que je n aie pas besoin de quelqu un d autre.","src":"Tirmidhi 3563","auth":"Sahih"}
+    ],
+    "connaissance": [
+      {"ar":"رَبِّ زِدْنِي عِلْمًا وَارْزُقْنِي فَهْمًا","tr":"Rabbi zidnî ilman warzuqnî fahman","fr":"Seigneur, accroît mes connaissances et accorde-moi la compréhension.","src":"Ta-Ha 20:114","auth":"Coran"},
+      {"ar":"اللَّهُمَّ انْفَعْنِي بِمَا عَلَّمْتَنِي وَعَلِّمْنِي مَا يَنْفَعُنِي","tr":"Allâhumma infa-nî bimâ allamtanî wa allimnî mâ yanfa-unî","fr":"O Allah, fais-moi profiter de ce que Tu m as enseigné et enseigne-moi ce qui m est utile.","src":"Ibn Majah 251","auth":"Sahih"}
+    ],
+    "dette": [
+      {"ar":"اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ","tr":"Allâhumma-kfinî bihalâlika an harâmika wa aghnini bifadlika amman siwâk","fr":"O Allah, rends-moi suffisant par ce qui est licite et rends-moi suffisant par Ta grâce.","src":"Tirmidhi 3563","auth":"Sahih"},
+      {"ar":"اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ وَأَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ وَمِنَ الْجُبْنِ وَالْبُخْلِ وَمِنَ ضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ","tr":"Allâhumma innî a-ûdhu bika minal-hammi wal-hazan... wa min dala-id-dayni wa ghalabatir-rijâl","fr":"O Allah, je cherche refuge en Toi contre l inquiétude, la tristesse, l incapacité, la paresse, la lâcheté, l avarice, le fardeau de la dette et la domination des hommes.","src":"Boukhari 6369","auth":"Sahih"}
+    ],
+    "mauvailoeil": [
+      {"ar":"أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّةِ مِنْ كُلِّ شَيْطَانٍ وَهَامَّةٍ وَمِنْ كُلِّ عَيْنٍ لَامَّةٍ","tr":"A-ûdhu bikalimâtillâhit-tâmmati min kulli shaytânin wa hâmmatin wa min kulli aynin lâmmah","fr":"Je cherche refuge dans les paroles parfaites d Allah contre tout diable, toute bete venimeuse et contre tout mauvais oeil.","src":"Boukhari 3191","auth":"Sahih"}
+    ],
+    "shaytan": [
+      {"ar":"أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ","tr":"A-ûdhu billâhi minash-shaytânir-rajîm","fr":"Je cherche refuge en Allah contre le diable maudit.","src":"Al-A-raf 7:200","auth":"Coran"},
+      {"ar":"بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ","tr":"Bismillâhilladhî lâ yadurru ma-asmihi shay-un fil-ardi wa lâ fis-samâ-i wa huwas-samî-ul-alîm (3x)","fr":"Au nom d Allah avec le nom duquel rien ne peut nuire sur Terre ni dans le Ciel et Il est Celui qui entend et sait tout. (3 fois matin et soir)","src":"Abou Daoud 5088","auth":"Sahih"}
+    ],
+    "cauchemar": [
+      {"ar":"أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ","tr":"A-ûdhu billâhi minash-shaytânir-rajîm","fr":"Je cherche refuge en Allah contre le diable maudit. A dire après un mauvais reve.","src":"Muslim 2261","auth":"Sahih"},
+      {"ar":"أَتَحَوَّلُ عَنْ جَنْبِي الَّذِي كُنْتُ عَلَيْهِ","tr":"Ataḥawwalu an janbiyalladhî kuntu alayh","fr":"Je me retourne sur mon autre côté. A faire après un mauvais reve.","src":"Muslim 2262","auth":"Sahih"}
+    ],
+    "peur_nuit": [
+      {"ar":"أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ","tr":"A-ûdhu bikalimâtillâhit-tâmmâti min sharri mâ khalaq (3x)","fr":"Je cherche refuge dans les paroles parfaites d Allah contre le mal de ce qu Il a créé. (3 fois)","src":"Muslim 2708","auth":"Sahih"}
+    ],
+    "fatiha": [
+      {"ar":"بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ الرَّحْمَٰنِ الرَّحِيمِ مَالِكِ يَوْمِ الدِّينِ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ","tr":"Bismillâhir-rahmânir-rahîm. Al-hamdu lillâhi rabbil-âlamîn. Ar-rahmânir-rahîm. Mâliki yawmid-dîn. Iyyâka na-budu wa iyyâka nasta-în. Ihdinaç-sirâtal-mustaqîm. Sirâtalladhîna an-amta alayhim ghayril-maghdûbi alayhim wa lad-dâllîn.","fr":"Au nom d Allah le Tout Miséricordieux le Très Miséricordieux. Louange à Allah Seigneur des mondes, le Tout Miséricordieux le Très Miséricordieux, Maître du Jour de la rétribution. C est Toi seul que nous adorons et c est Toi seul dont nous implorons le secours. Guide-nous dans le droit chemin, le chemin de ceux que Tu as comblés de bienfaits, non pas de ceux qui ont encouru Ta colere ni des égarés.","src":"Sourate Al-Fatiha 1:1-7","auth":"Coran"}
+    ],
+    "ibrahim_dua": [
+      {"ar":"رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ","tr":"Rabbanâ taqabbal minnâ innaka antas-samî-ul-alîm","fr":"Seigneur, accepte de nous. Tu es certes Celui qui entend et le Savant.","src":"Al-Baqara 2:127","auth":"Coran"},
+      {"ar":"رَبَّنَا وَاجْعَلْنَا مُسْلِمَيْنِ لَكَ وَمِن ذُرِّيَّتِنَا أُمَّةً مُّسْلِمَةً لَّكَ","tr":"Rabbanâ waj-alnâ muslimayni laka wa min dhurriyyatinâ ummatan muslimatan lak","fr":"Seigneur, fais de nous deux des soumis à Toi et de notre descendance une communauté soumise à Toi.","src":"Al-Baqara 2:128","auth":"Coran"}
+    ],
+    "qunut": [
+      {"ar":"اللَّهُمَّ اهْدِنِي فِيمَنْ هَدَيْتَ وَعَافِنِي فِيمَنْ عَافَيْتَ وَتَوَلَّنِي فِيمَنْ تَوَلَّيْتَ وَبَارِكْ لِي فِيمَا أَعْطَيْتَ","tr":"Allâhumma-hdinî fîman hadayt, wa âfinî fîman âfayt, wa tawallanî fîman tawallayt, wa bârik lî fîmâ a-tayt","fr":"O Allah, guide-moi parmi ceux que Tu as guidés, préserve-moi parmi ceux que Tu as préservés, prends-moi en charge parmi ceux dont Tu t es chargé et bénis-moi dans ce que Tu m as donné.","src":"Abou Daoud 1425","auth":"Sahih"}
+    ],
+    "laylat_qadr": [
+      {"ar":"اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي","tr":"Allâhumma innaka afuwwun tuhibbul-afwa fa-fu annî","fr":"O Allah, Tu es le Pardonneur, Tu aimes le pardon, pardonne-moi. Douaa à répéter la nuit du Destin.","src":"Tirmidhi 3513","auth":"Sahih"}
+    ],
+    "ramadan": [
+      {"ar":"اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي","tr":"Allâhumma innaka afuwwun tuhibbul-afwa fa-fu annî","fr":"O Allah, Tu es le Pardonneur, Tu aimes le pardon, pardonne-moi.","src":"Tirmidhi 3513","auth":"Sahih"},
+      {"ar":"ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الْأَجْرُ إِنْ شَاءَ اللَّهُ","tr":"Dhahabad-dama-u wabtallatil-urûqu wa thabatal-ajru in shâ-allâh","fr":"La soif est partie, les veines sont désaltérées et la récompense est acquise si Allah veut. A dire pour rompre le jeune.","src":"Abou Daoud 2357","auth":"Hasan"}
+    ],
+    "vendredi": [
+      {"ar":"اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ","tr":"Allâhumma salli alâ Muhammad wa alâ âli Muhammad","fr":"O Allah, bénis Muhammad et la famille de Muhammad. A répéter abondamment le vendredi.","src":"Boukhari 3370","auth":"Sahih"}
+    ],
+    "hajj": [
+      {"ar":"لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ","tr":"Labbaykallâhumma labbayk, labbayka lâ sharîka laka labbayk, innal-hamda wan-ni-mata laka wal-mulk, lâ sharîka lak","fr":"Me voici à Ta disposition o Allah, me voici. Me voici, Tu n as pas d associé, me voici. En vérité la louange, la grâce et la royauté T appartiennent. Tu n as pas d associé. (Talbiya du Hajj)","src":"Boukhari 1549","auth":"Sahih"}
+    ],
+    "pluie": [
+      {"ar":"اللَّهُمَّ صَيِّبًا نَافِعًا","tr":"Allâhumma sayyiban nâfi-â","fr":"O Allah, une pluie bienfaisante. A dire quand il pleut.","src":"Boukhari 1032","auth":"Sahih"},
+      {"ar":"مُطِرْنَا بِفَضْلِ اللَّهِ وَرَحْمَتِهِ","tr":"Mutirna bifadlillâhi wa rahmatih","fr":"Nous avons reçu la pluie par la grâce et la miséricorde d Allah. A dire après la pluie.","src":"Boukhari 846","auth":"Sahih"}
+    ],
+    "vent": [
+      {"ar":"اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا وَخَيْرَ مَا فِيهَا وَخَيْرَ مَا أُرْسِلَتْ بِهِ","tr":"Allâhumma innî as-aluka khayrahâ wa khayra mâ fîhâ wa khayra mâ ursilat bih","fr":"O Allah, je Te demande le bien de ce vent, le bien de ce qu il contient et le bien de ce avec quoi il a été envoyé.","src":"Muslim 899","auth":"Sahih"}
+    ],
+    "foudre": [
+      {"ar":"سُبْحَانَ الَّذِي يُسَبِّحُ الرَّعْدُ بِحَمْدِهِ وَالْمَلَائِكَةُ مِنْ خِيفَتِهِ","tr":"Subhânalladhî yusabbihur-ra-du bihamdihi wal-malâ-ikatu min khîfatih","fr":"Gloire à Celui que le tonnerre glorifie avec Sa louange ainsi que les anges par crainte de Lui. A dire quand on entend le tonnerre.","src":"Muwatta 2:992","auth":"Sahih"}
+    ]
+  }
+}
+</script>
+
+<script>
+// Load data from JSON script tag (avoids all quote issues)
+var DATA = JSON.parse(document.getElementById("data-script").textContent);
+var THEMES = DATA.themes;
+var DOUAAS = DATA.douaas;
+
+var favs = JSON.parse(localStorage.getItem("douaa_favs") || "[]");
+
+// ─── LOCK ───
+document.getElementById("lbtn").onclick = function() {
+  var p = document.getElementById("lpwd").value;
+  if (p === "douaa2025") {
+    sessionStorage.setItem("dok", "1");
+    init();
+  } else {
+    document.getElementById("lerr").style.display = "block";
+    document.getElementById("lpwd").value = "";
+  }
+};
+document.getElementById("lpwd").onkeydown = function(e) {
+  if (e.key === "Enter") document.getElementById("lbtn").click();
+};
+if (sessionStorage.getItem("dok") === "1") init();
+
+function init() {
+  document.getElementById("sl").style.display = "none";
+  document.getElementById("sh").style.display = "flex";
+  document.getElementById("bnav").style.display = "flex";
+  buildFilters();
+  buildGrid(THEMES);
+  document.getElementById("srch").oninput = function() { doSearch(this.value); };
+}
+
+// ─── NAV ───
+function showOnly(id) {
+  ["sl","sh","sd","sf"].forEach(function(s) { document.getElementById(s).style.display = "none"; });
+  document.getElementById(id).style.display = "flex";
+  window.scrollTo(0,0);
+}
+function goHome() {
+  showOnly("sh");
+  document.getElementById("bnh").classList.add("on");
+  document.getElementById("bnf").classList.remove("on");
+}
+function goFavs() {
+  showOnly("sf");
+  document.getElementById("bnf").classList.add("on");
+  document.getElementById("bnh").classList.remove("on");
+  renderFavs();
+}
+function goTheme(id) {
+  showOnly("sd");
+  document.getElementById("bnh").classList.remove("on");
+  renderTheme(id);
+}
+
+// ─── FILTERS & GRID ───
+function buildFilters() {
+  var cats = [
+    {id:"all",lb:"Tous"},{id:"quotidien",lb:"Quotidien"},{id:"sante",lb:"Sante"},
+    {id:"voyage",lb:"Voyage"},{id:"famille",lb:"Famille"},{id:"travail",lb:"Travail"},
+    {id:"protection",lb:"Protection"},{id:"coran",lb:"Coran"},{id:"special",lb:"Special"},{id:"nature",lb:"Nature"}
+  ];
+  var h = "";
+  cats.forEach(function(c,i) {
+    h += "<button class='fta" + (i===0?" on":"") + "' onclick=\"filterCat('" + c.id + "',this)\">" + c.lb + "</button>";
+  });
+  document.getElementById("ftabs").innerHTML = h;
+}
+function filterCat(cat, btn) {
+  document.querySelectorAll(".fta").forEach(function(t){t.classList.remove("on");});
+  btn.classList.add("on");
+  buildGrid(cat==="all" ? THEMES : THEMES.filter(function(t){return t.cat===cat;}));
+}
+function doSearch(q) {
+  if (!q) { buildGrid(THEMES); return; }
+  var low = q.toLowerCase();
+  buildGrid(THEMES.filter(function(t){ return t.fr.toLowerCase().indexOf(low)>-1 || t.ar.indexOf(q)>-1; }));
+}
+function buildGrid(list) {
+  var h = "";
+  list.forEach(function(t) {
+    var cnt = (DOUAAS[t.id]||[]).length;
+    h += "<div class='tc' onclick=\"goTheme('" + t.id + "')\">";
+    h += "<div class='te'>" + t.em + "</div>";
+    h += "<div class='tna'>" + t.ar + "</div>";
+    h += "<div class='tnf'>" + t.fr + "</div>";
+    h += "<div class='tnc'>" + cnt + " douaa" + (cnt>1?"s":"") + "</div></div>";
+  });
+  document.getElementById("tgrid").innerHTML = h;
+}
+
+// ─── THEME DETAIL ───
+function renderTheme(id) {
+  var theme = THEMES.filter(function(t){return t.id===id;})[0];
+  if (!theme) return;
+  document.getElementById("dnavt").textContent = theme.fr;
+  document.getElementById("dhdr").innerHTML = "<div class='dhe'>" + theme.em + "</div><div class='dha'>" + theme.ar + "</div><div class='dhf'>" + theme.fr + "</div>";
+  var list = DOUAAS[id] || [];
+  if (!list.length) {
+    document.getElementById("dlist").innerHTML = "<div class='ef'><div class='ei'>🤲</div><p>Douaas à ajouter prochainement.</p></div>";
+    return;
+  }
+  var h = "";
+  list.forEach(function(d,i) {
+    var key = id + "_" + i;
+    var isFav = favs.indexOf(key) > -1;
+    h += "<div class='dc'>";
+    h += "<div class='dn'>Douaa " + (i+1) + "</div>";
+    h += "<div class='dar'>" + d.ar + "</div>";
+    h += "<div class='dtr'>" + d.tr + "</div>";
+    h += "<div class='dfr'>" + d.fr + "</div>";
+    h += "<div class='ds'><span class='dba'>📚 " + d.src + " — " + d.auth + "</span>";
+    h += "<div class='dac'>";
+    h += "<button class='dab" + (isFav?" fav":"") + "' id='fb_" + key + "' onclick=\"togFav('" + key + "')\">" + (isFav?"⭐":"☆") + " Favori</button>";
+    h += "<button class='dab' onclick=\"copyD('" + key + "')\">📋</button>";
+    h += "</div></div></div>";
+  });
+  document.getElementById("dlist").innerHTML = h;
+}
+
+// ─── FAVS ───
+function togFav(key) {
+  var idx = favs.indexOf(key);
+  var btn = document.getElementById("fb_" + key);
+  if (idx === -1) {
+    favs.push(key);
+    if (btn) { btn.innerHTML = "⭐ Favori"; btn.classList.add("fav"); }
+    toast("⭐ Ajouté aux favoris");
+  } else {
+    favs.splice(idx, 1);
+    if (btn) { btn.innerHTML = "☆ Favori"; btn.classList.remove("fav"); }
+    toast("Retiré des favoris");
+  }
+  localStorage.setItem("douaa_favs", JSON.stringify(favs));
+}
+function renderFavs() {
+  if (!favs.length) {
+    document.getElementById("flist").innerHTML = "<div class='ef'><div class='ei'>⭐</div><p>Aucun favori.<br>Ajoutez des douaas depuis les thématiques !</p></div>";
+    return;
+  }
+  var h = "";
+  favs.forEach(function(key) {
+    var parts = key.split("_");
+    var tid = parts[0]; var idx = parseInt(parts[1]);
+    var theme = THEMES.filter(function(t){return t.id===tid;})[0];
+    var d = (DOUAAS[tid]||[])[idx];
+    if (!d||!theme) return;
+    h += "<div class='dc'>";
+    h += "<div class='dn'>" + theme.em + " " + theme.fr + "</div>";
+    h += "<div class='dar'>" + d.ar + "</div>";
+    h += "<div class='dtr'>" + d.tr + "</div>";
+    h += "<div class='dfr'>" + d.fr + "</div>";
+    h += "<div class='ds'><span class='dba'>📚 " + d.src + "</span>";
+    h += "<button class='dab fav' onclick=\"togFav('" + key + "');renderFavs();\">⭐ Retirer</button></div></div>";
+  });
+  document.getElementById("flist").innerHTML = h;
+}
+
+// ─── COPY & TOAST ───
+function copyD(key) {
+  var parts = key.split("_");
+  var d = (DOUAAS[parts[0]]||[])[parseInt(parts[1])];
+  if (!d) return;
+  var txt = d.ar + "\n\n" + d.tr + "\n\n" + d.fr + "\n\nSource: " + d.src + "\n\n— Douaa Invocation App";
+  navigator.clipboard.writeText(txt).then(function(){toast("📋 Copié !");});
+}
+function toast(msg) {
+  var t = document.getElementById("tst");
+  t.textContent = msg; t.classList.add("sh");
+  setTimeout(function(){t.classList.remove("sh");}, 2500);
+}
+</script>
+</body>
+</html>
